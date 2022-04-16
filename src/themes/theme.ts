@@ -5,7 +5,7 @@ export const theme1 = extendTheme({
         primary: "#00A3C4",
         primary2: "#0BC5EA",
         primary3: "#C4F1F9",
-        back1:"#B2F5EA",
+        back1: "#B2F5EA",
         txt1: "gray.50",
         yellow: "yellow.200",
     },
@@ -13,6 +13,7 @@ export const theme1 = extendTheme({
         body: "system-ui, sans-serif",
         heading: "Georgia, serif",
         mono: "Menlo, monospace",
+        verdana: "Raleway, sans-serif",
     },
     fontSizes: {
         xs: "0.75rem",
