@@ -11,6 +11,14 @@ import React from "react";
 import CategorySelector from "./CategorySelector";
 import ColorSelector from "./ColorSelector";
 
+const followerCss = {
+    // position: '-webkit-sticky',
+    position: 'sticky',
+    top: 5,
+    // backgroundColor: 'green',
+    // border: '2px solid #4CAF50'
+}
+
 function FilterBox() {
     const categories = [
         "Seasonal",
@@ -39,6 +47,7 @@ function FilterBox() {
             p="6"
             rounded="md"
             bg="white"
+            sx={followerCss}
         >
             <Text fontSize={"2rem"}>Filters</Text>
 

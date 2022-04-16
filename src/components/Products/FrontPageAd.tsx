@@ -36,17 +36,17 @@ function FrontPageAd() {
             <Box h="100%" w="100%" >
                 <Image
                     alt="ad"
-                    objectFit={"fill"}
+                    objectFit={"inherit"}
                     // src={ads[visibleAd].imageUrl}
                     bg="skyblue "
                     w="100%"
                     h="100%"
                 />
             </Box>
-            <Button as={AiOutlineLeft} pos="absolute" top="22%" left="1%" />
-            <Button as={AiOutlineRight} pos="absolute" top="22%" left="92%" />
+            <Button as={AiOutlineLeft} pos="absolute" top="12%" left="7%" />
+            <Button as={AiOutlineRight} pos="absolute" top="12%" left="90%" />
             
-            <Box pos="absolute" top="38%" left="calc((100% - 2rem)/2)">
+            <Box pos="absolute" top="20%" left="calc((100% - 2rem)/2)">
                 {ads.map((ad, idx) => (
                     <Icon
                         key={idx}

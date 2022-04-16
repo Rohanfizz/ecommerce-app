@@ -8,7 +8,7 @@ import FilterBox from "./FilterBox/FilterBox";
 function ProductViewer() {
     return (
         <Grid
-            h="100vh"
+            // h="100vh"
             templateRows="repeat(20, 1fr)"
             templateColumns="repeat(5, 1fr)"
             gap={2}

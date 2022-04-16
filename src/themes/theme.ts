@@ -8,6 +8,7 @@ export const theme1 = extendTheme({
         back1: "#B2F5EA",
         txt1: "gray.50",
         yellow: "yellow.200",
+        ratingStar: "#D69E2E"
     },
     fonts: {
         body: "system-ui, sans-serif",
