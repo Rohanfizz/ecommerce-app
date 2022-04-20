@@ -13,6 +13,7 @@ import { AiFillShopping, AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import { BsCartPlusFill } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
+import AddToCartButton from "../../Cart/AddToCartButton";
 
 const displayFlexCommon = {
     display: "flex",
@@ -64,22 +65,23 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
                     {product.reviewCount}
                 </Flex>
             </GridItem>
-            <GridItem rowSpan={6} colSpan={4} sx={displayFlexCommon}>
-                <ButtonGroup isAttached variant="solid" gap="0.2rem">
+            <GridItem rowSpan={6} colSpan={4} sx={displayFlexCommon} h="100%" >
+                <ButtonGroup isAttached variant="solid" gap="0.2rem" h="5rem" >
                     <Button
-                        h="5rem"
                         leftIcon={<AiFillShopping />}
-                        fontSize={"2xl"}
+                        fontSize="120%"
+                        h="100%"
                     >
                         Buy Now
                     </Button>
-                    <Button
+                    {/* <Button
                         h="5rem"
                         leftIcon={<BsCartPlusFill />}
                         fontSize={"2xl"}
                     >
                         Add To Cart
-                    </Button>
+                    </Button> */}
+                    <AddToCartButton product={product}/>
                 </ButtonGroup>
             </GridItem>
             <GridItem rowSpan={5} colSpan={6}>

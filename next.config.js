@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+    reactStrictMode: true,
+    env: {
+        ENVIRONMENT: process.env.NODE_ENV === "production" ? "prod" : "dev",
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

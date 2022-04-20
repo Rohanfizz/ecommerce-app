@@ -9,13 +9,16 @@ import {
     Image,
     Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import { BsCartPlusFill } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
+import useCart from "../../../hooks/useCart";
+import AddToCartButton from "../../Cart/AddToCartButton";
 
-const ProductCard: React.FC = ({ product }: any) => {
+const ProductCard: React.FC<{ product: any }> = ({ product }) => {
     // uuid: "asdasd",
     //     name: "Makeup Revolution Maxi Reloaded Palette Large It Up, Multicolor, 60 g",
     //     primaryCategory: "Spray",
@@ -28,12 +31,20 @@ const ProductCard: React.FC = ({ product }: any) => {
     //         "https://m.media-amazon.com/images/I/91XD5PkJVgL._AC_UL320_.jpg",
     //         "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
     //     ],
+
+    const router = useRouter();
+
     const ratingStars: any[] = [];
     for (let i = 1; i <= 5; i++) {
         if (product.ratingNumber >= i)
             ratingStars.push(<Icon as={AiFillStar} color="ratingStar" />);
         else ratingStars.push(<Icon as={AiOutlineStar} color="ratingStar" />);
     }
+
+    const productClickHandler = () => {
+        router.push(`/product/${product.uuid}`);
+    };
+
     return (
         <Flex
             flexDir="column"
@@ -45,6 +56,7 @@ const ProductCard: React.FC = ({ product }: any) => {
             p="1.5"
             rounded="md"
             bg="white"
+            _hover={{ cursor: "pointer" }}
         >
             <Box w="100%" h="55%">
                 <Image
@@ -112,9 +124,11 @@ const ProductCard: React.FC = ({ product }: any) => {
                 w="100%"
                 paddingTop={"0.5rem"}
             >
-                <ButtonGroup>
-                    <Button leftIcon={<GrView />}>View</Button>
-                    <Button leftIcon={<BsCartPlusFill />}>Add To Cart</Button>
+                <ButtonGroup h="100%">
+                    <Button leftIcon={<GrView />} onClick={productClickHandler}>
+                        View
+                    </Button>
+                    <AddToCartButton product={product} />
                 </ButtonGroup>
             </Flex>
         </Flex>

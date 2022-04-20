@@ -14,7 +14,7 @@ import ColorSelector from "./ColorSelector";
 const followerCss = {
     // position: '-webkit-sticky',
     position: 'sticky',
-    top: 5,
+    top: 20,
     // backgroundColor: 'green',
     // border: '2px solid #4CAF50'
 }

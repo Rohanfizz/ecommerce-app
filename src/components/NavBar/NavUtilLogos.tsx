@@ -1,14 +1,17 @@
-import { Box, Flex, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import React from "react";
+import CartModal from "../Cart/CartModal";
+import NavbarCartLogo from "./NavbarCartLogo";
 
 const hoverCss = {
     cursor: "pointer",
-    transform: "scale(1.2)",
+    transform: "scale(1.1)",
 };
 
 function NavUtilLogos() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Flex
             // border="1px solid blue"
@@ -19,10 +22,10 @@ function NavUtilLogos() {
             justifyContent={"space-around"}
             // flexDir={"column"}
             alignItems="center"
-            paddingRight="3rem"
+            // paddingRight="3rem"
         >
-            <Icon as={BsCart4} _hover={hoverCss}/>
-            <Icon as={FaUser} _hover={hoverCss}/>
+            <NavbarCartLogo />
+            <Icon as={FaUser} _hover={hoverCss} />
         </Flex>
     );
 }
