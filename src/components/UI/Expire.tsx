@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-const Expire:React.FC = (props:any) => {
+const Expire = (props:any) => {
 //   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
