@@ -10,11 +10,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <RecoilRoot>
             <ChakraProvider theme={theme1}>
-                <AnimateSharedLayout>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                </AnimateSharedLayout>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
             </ChakraProvider>
         </RecoilRoot>
     );

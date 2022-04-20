@@ -3,7 +3,7 @@ import React from "react";
 import BottomBar from "../NavBar/BottomBar";
 import Navbar from "../NavBar/Navbar";
 
-const Layout: React.FC = (props: any) => {
+const Layout = (props: any) => {
     return (
         <Flex
             flexDir="column"
