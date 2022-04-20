@@ -1,7 +1,7 @@
 import { Checkbox, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 
-function CategorySelector(props:any) {
+function CategorySelector(props: any) {
     return (
         <>
             <Text fontSize={"md"} fontFamily="mono" marginTop="0.5rem">
