@@ -1,9 +1,18 @@
-import { Box, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, Icon } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
-import { BsCart4 } from "react-icons/bs";
+
 import React from "react";
-import CartModal from "../Cart/CartModal";
+
 import NavbarCartLogo from "./NavbarCartLogo";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+    isLoggedInSelector,
+    showLoginModalAtom,
+    showSignupModalAtom,
+    showUserActionDropboxAtom,
+} from "../../store/authStore";
+import LoginModal from "../User/LoginModal";
+import SignupModal from "../User/SignupModal";
 
 const hoverCss = {
     cursor: "pointer",
@@ -11,7 +20,22 @@ const hoverCss = {
 };
 
 function NavUtilLogos() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const isLoggedIn = useRecoilValue(isLoggedInSelector);
+    const [showLoginModal, setshowLoginModal] =
+        useRecoilState(showLoginModalAtom);
+    const [showUserActionDropbox, setshowUserActionDropbox] = useRecoilState(
+        showUserActionDropboxAtom
+    );
+    const [showSignUpmodal,setshowSignupModal] = useRecoilState(showSignupModalAtom);
+
+    const userIconClickHandler = () => {
+        if (isLoggedIn) {
+            setshowUserActionDropbox(true);
+        } else {
+            setshowLoginModal(true);
+        }
+    };
+
     return (
         <Flex
             // border="1px solid blue"
@@ -25,7 +49,13 @@ function NavUtilLogos() {
             // paddingRight="3rem"
         >
             <NavbarCartLogo />
-            <Icon as={FaUser} _hover={hoverCss} />
+            <Icon
+                as={FaUser}
+                _hover={hoverCss}
+                onClick={userIconClickHandler}
+            />
+            {showLoginModal && <LoginModal/>}
+            {showSignUpmodal && <SignupModal/>}
         </Flex>
     );
 }

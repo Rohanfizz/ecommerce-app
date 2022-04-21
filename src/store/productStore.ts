@@ -1,6 +1,7 @@
 import { selector } from "recoil";
 
-export const productSelector = selector({       // TODO: hard coded right now 
+export const productSelector = selector({
+    // TODO: hard coded right now
     key: "productSelector",
     get: ({ get }) => {
         // async fetch products from products document
@@ -129,7 +130,7 @@ export const productSelector = selector({       // TODO: hard coded right now
                 price: 1299,
                 stockStatus: true,
                 productImage: [
-                    "https://m.media-amazon.com/images/I/71BB5iXmBHL._AC_UL320_.jpg",
+                    "https://m.media-amazon.com/images/I/51LPLkySP2S._SL1000_.jpg",
                     "https://m.media-amazon.com/images/I/91XD5PkJVgL._AC_UL320_.jpg",
                     "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
                 ],
@@ -267,7 +268,7 @@ export const productSelector = selector({       // TODO: hard coded right now
                 price: 1299,
                 stockStatus: true,
                 productImage: [
-                    "https://m.media-amazon.com/images/I/71BB5iXmBHL._AC_UL320_.jpg",
+                    "https://m.media-amazon.com/images/I/51LPLkySP2S._SL1000_.jpg",
                     "https://m.media-amazon.com/images/I/91XD5PkJVgL._AC_UL320_.jpg",
                     "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
                 ],

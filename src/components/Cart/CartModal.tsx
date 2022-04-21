@@ -42,22 +42,7 @@ const cartItems = [
         quantity: 5,
         price: 1234,
     },
-    {
-        uuid: "4",
-        productImage:
-            "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
-        name: "Makeup Revolution Maxi Reloaded Palette Large It Up, Multicolor, 60 g",
-        quantity: 6,
-        price: 1234,
-    },
-    {
-        uuid: "5",
-        productImage:
-            "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
-        name: "Makeup Revolution Maxi Reloaded Palette Large It Up, Multicolor, 60 g",
-        quantity: 6,
-        price: 1234,
-    },
+   
 ];
 
 const CartModal: React.FC = () => {
@@ -81,8 +66,7 @@ const CartModal: React.FC = () => {
                 <ModalOverlay />
                 <ModalContent h="45rem">
                     <ModalHeader borderBottom="1px solid skyblue">
-                        {process.env.ENVIRONMENT}
-                        {/* Your Cart */}
+                        Your Cart
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody borderBottom="1px solid skyblue">
