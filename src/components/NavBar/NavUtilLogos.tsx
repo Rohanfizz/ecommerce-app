@@ -13,6 +13,7 @@ import {
 } from "../../store/authStore";
 import LoginModal from "../User/LoginModal";
 import SignupModal from "../User/SignupModal";
+import UserMenu from "../User/UserMenu";
 
 const hoverCss = {
     cursor: "pointer",
@@ -26,7 +27,8 @@ function NavUtilLogos() {
     const [showUserActionDropbox, setshowUserActionDropbox] = useRecoilState(
         showUserActionDropboxAtom
     );
-    const [showSignUpmodal,setshowSignupModal] = useRecoilState(showSignupModalAtom);
+    const [showSignUpmodal, setshowSignupModal] =
+        useRecoilState(showSignupModalAtom);
 
     const userIconClickHandler = () => {
         if (isLoggedIn) {
@@ -49,13 +51,24 @@ function NavUtilLogos() {
             // paddingRight="3rem"
         >
             <NavbarCartLogo />
-            <Icon
-                as={FaUser}
-                _hover={hoverCss}
-                onClick={userIconClickHandler}
-            />
-            {showLoginModal && <LoginModal/>}
-            {showSignUpmodal && <SignupModal/>}
+            {!isLoggedIn && (
+                <Icon
+                    as={FaUser}
+                    _hover={hoverCss}
+                    onClick={userIconClickHandler}
+                />
+            )}
+            {showLoginModal && <LoginModal />}
+            {showSignUpmodal && <SignupModal />}
+            {isLoggedIn && (
+                <UserMenu>
+                    <Icon
+                        as={FaUser}
+                        _hover={hoverCss}
+                        onClick={userIconClickHandler}
+                    />
+                </UserMenu>
+            )}
         </Flex>
     );
 }

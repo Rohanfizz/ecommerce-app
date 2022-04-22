@@ -39,11 +39,6 @@ export default function LoginModal() {
     };
     console.log("asdasdas");
     return (
-        //   <Flex
-        //     minH={'100vh'}
-        //     align={'center'}
-        //     justify={'center'}
-        //     bg={useColorModeValue('gray.50', 'gray.800')}>
         <Modal isOpen={showLoginModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
             <ModalContent>
@@ -56,10 +51,6 @@ export default function LoginModal() {
                 <ModalBody>
                     <Stack mx={"auto"} maxW={"lg"} py={10} px={6}>
                         <Stack align={"center"}>
-                            {/* <Text fontSize={"lg"} color={"gray.600"}>
-                                to enjoy all of our cool{" "}
-                                <Link color={"blue.400"}>features</Link> ✌️
-                            </Text> */}
                         </Stack>
                         <Box
                             rounded={"lg"}
@@ -111,13 +102,6 @@ export default function LoginModal() {
                         </Box>
                     </Stack>
                 </ModalBody>
-
-                {/* <ModalFooter>
-                    <Button colorScheme="blue" mr={3} onClick={onCloseModal}>
-                        Close
-                    </Button>
-                    <Button variant="ghost">Secondary Action</Button>
-                </ModalFooter> */}
             </ModalContent>
         </Modal>
 

@@ -47,11 +47,6 @@ export default function SignupModal() {
     };
 
     return (
-        //   <Flex
-        //     minH={'100vh'}
-        //     align={'center'}
-        //     justify={'center'}
-        //     bg={useColorModeValue('gray.50', 'gray.800')}>
         <Modal isOpen={showsignupModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
             <ModalContent>
@@ -63,14 +58,6 @@ export default function SignupModal() {
                 <ModalCloseButton />
                 <ModalBody>
                     <Stack spacing={8} mx={"auto"} maxW={"lg"} py={1} px={6}>
-                        {/* <Stack align={"center"}>
-                            <Heading fontSize={"4xl"} textAlign={"center"}>
-                                Sign up
-                            </Heading>
-                            <Text fontSize={"lg"} color={"gray.600"}>
-                                to enjoy all of our cool features ✌️
-                            </Text>
-                        </Stack> */}
                         <Box
                             rounded={"lg"}
                             bg={useColorModeValue("white", "gray.700")}
@@ -154,13 +141,6 @@ export default function SignupModal() {
                         </Box>
                     </Stack>
                 </ModalBody>
-
-                {/* <ModalFooter>
-                    <Button colorScheme="blue" mr={3} onClick={onCloseModal}>
-                        Close
-                    </Button>
-                    <Button variant="ghost">Secondary Action</Button>
-                </ModalFooter> */}
             </ModalContent>
         </Modal>
 
