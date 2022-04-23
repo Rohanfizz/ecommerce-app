@@ -16,15 +16,33 @@ import {
     ModalHeader,
     ModalCloseButton,
     ModalBody,
+    FormErrorMessage,
 } from "@chakra-ui/react";
+import {useQuery} from 'react-query';
 import { useRecoilState } from "recoil";
+import useForm from "../../hooks/useForm";
 import { showLoginModalAtom, showSignupModalAtom } from "../../store/authStore";
+import validator from "validator";
 
 export default function LoginModal() {
     const [showLoginModal, setshowLoginModal] =
         useRecoilState(showLoginModalAtom);
     const [showsignupModal, setshowsignupModal] =
         useRecoilState(showSignupModalAtom);
+
+    const {
+        formValue: emailValue,
+        valueOnChange: emailOnChange,
+        valueOnFocus: emailOnFocus,
+        isError: wrongEmail,
+    } = useForm(validator.isEmail);
+
+    const {
+        formValue: passwordValue,
+        valueOnChange: passwordOnChange,
+        valueOnFocus: passwordOnFocus,
+        isError: wrongPassword,
+    } = useForm((s: string) => s.length >= 8);
 
     const onOpenModal = () => {
         setshowLoginModal(true);
@@ -37,7 +55,9 @@ export default function LoginModal() {
         setshowsignupModal(true);
         setshowLoginModal(false);
     };
-    console.log("asdasdas");
+
+    useQuery()
+
     return (
         <Modal isOpen={showLoginModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
@@ -50,8 +70,7 @@ export default function LoginModal() {
                 <ModalCloseButton />
                 <ModalBody>
                     <Stack mx={"auto"} maxW={"lg"} py={10} px={6}>
-                        <Stack align={"center"}>
-                        </Stack>
+                        <Stack align={"center"}></Stack>
                         <Box
                             rounded={"lg"}
                             bg={useColorModeValue("white", "gray.700")}
@@ -59,13 +78,34 @@ export default function LoginModal() {
                             // p={8}
                         >
                             <Stack spacing={4}>
-                                <FormControl id="email">
+                                <FormControl
+                                    id="email"
+                                    isRequired
+                                    isInvalid={wrongEmail}
+                                >
                                     <FormLabel>Email address</FormLabel>
-                                    <Input type="email" />
+                                    <Input
+                                        type="email"
+                                        value={emailValue}
+                                        onChange={emailOnChange}
+                                        onFocus={emailOnFocus}
+                                    />
+                                    <FormErrorMessage>
+                                        Enter a valid Email Id
+                                    </FormErrorMessage>
                                 </FormControl>
-                                <FormControl id="password">
+                                <FormControl
+                                    id="password"
+                                    isRequired
+                                    isInvalid={wrongPassword}
+                                >
                                     <FormLabel>Password</FormLabel>
-                                    <Input type="password" />
+                                    <Input
+                                        type={"password"}
+                                        value={passwordValue}
+                                        onChange={passwordOnChange}
+                                        onFocus={passwordOnFocus}
+                                    />
                                 </FormControl>
                                 <Stack py={10}>
                                     <Stack

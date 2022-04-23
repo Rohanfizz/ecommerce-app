@@ -23,12 +23,12 @@ const LimitErrorModal = () => {
     const onCloseHandler = () => {
         setLimitErrorModal(false);
     };
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setLimitErrorModal(false);
-        }, 10);
-        return clearInterval(timer);
-    }, [setLimitErrorModal]);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         setLimitErrorModal(false);
+    //     }, 10);
+    //     return clearInterval(timer);
+    // }, [setLimitErrorModal]);
 
     
     return (

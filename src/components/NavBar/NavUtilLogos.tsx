@@ -58,8 +58,8 @@ function NavUtilLogos() {
                     onClick={userIconClickHandler}
                 />
             )}
-            {showLoginModal && <LoginModal />}
-            {showSignUpmodal && <SignupModal />}
+            {showLoginModal && !isLoggedIn && <LoginModal />}
+            {showSignUpmodal && !isLoggedIn && <SignupModal />}
             {isLoggedIn && (
                 <UserMenu>
                     <Icon

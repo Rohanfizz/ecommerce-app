@@ -21,13 +21,12 @@ const NavbarCartLogo = () => {
 
     const totalQuantity: number = cart.reduce(
         (totalItems: number, item: any) => {
-            console.log(totalItems);
             return totalItems + item.quantity;
         },
         0
     );
 
-    console.log(totalQuantity);
+    
     return (
         <Flex
             borderRadius={"1rem"}

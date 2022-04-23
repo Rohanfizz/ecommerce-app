@@ -7,11 +7,12 @@ const Expire = (props:any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       props.setterFunction(false);
+      console.log(props.visibleProperty);
     }, props.delay);
     return () => clearTimeout(timer)
   }, [props.delay]);
 
-  return props.visibleProperty ? <Box position="absolute">{props.children}</Box> :<> </>;
+  return props.visibleProperty ? <Box position="absolute" >{props.children}</Box> :<> </>;
 };
 
 export default Expire;

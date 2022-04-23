@@ -9,3 +9,13 @@ export const limitErrorModalShowAtom = atom({
     key: "limitErrorModalShowAtom",
     default: false,
 });
+
+export const showErrorModalAtom = atom({
+    key: "showErrorModalAtom",
+    default: false,
+});
+
+export const showSuccessModalAtom = atom({
+    key: "showSuccessModalAtom",
+    default: false,
+});

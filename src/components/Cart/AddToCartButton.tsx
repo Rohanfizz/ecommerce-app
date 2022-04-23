@@ -3,8 +3,7 @@ import React from "react";
 import { BsCartPlusFill } from "react-icons/bs";
 import { useRecoilValue } from "recoil";
 import useCart from "../../hooks/useCart";
-import { limitErrorModalShowAtom } from "../../store/UtilStore";
-import LimitErrorModal from "./LimitErrorModal";
+
 
 const AddToCartButton: React.FC<{ product: any }> = ({ product }) => {
     const { editCartHandler } = useCart();
