@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const signUpReq = (
-    firstName,
-    lastName,
-    email,
-    password,
-    passwordConfirm
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    passwordConfirm: string
 ) => {
     const data = {
         firstName,
@@ -14,16 +14,27 @@ export const signUpReq = (
         password,
         passwordConfirm,
     };
-    // console.log(data,`${process.env.URL}api/v1/users/signup`);
+    // console.log(data, `${process.env.BACKEND_URL}api/v1/users/signup`);
     return axios
-        .post(`${process.env.URL}api/v1/users/signup`, data)
-        .then((res) => {
-            // const result = res.json();
-            console.log(res);
-            return res;
+        .post(`${process.env.BACKEND_URL}api/v1/users/signup`, data, {
+            // validateStatus: (status) => true,
         })
-        // .catch((error) => {
-        //     console.log(error.response.data);
-        //     return error
-        // });
+        .then((res) => {
+            return res;
+        });
+};
+
+export const loginReq = (email: string, password: string) => {
+    const data = {
+        email,
+        password,
+    };
+    // console.log(data, `${process.env.BACKEND_URL}api/v1/users/login`);
+    return axios
+        .post(`${process.env.BACKEND_URL}api/v1/users/login`, data, {
+            // validateStatus: (status) => true,
+        })
+        .then((res) => {
+            return res;
+        });
 };

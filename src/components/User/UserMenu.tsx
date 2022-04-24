@@ -1,7 +1,7 @@
 import { Button, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 
-const UserMenu: React.FC =({ children }: {children: ReactNode}): ReactElement => {
+const UserMenu =({ children }: {children: ReactNode}): ReactElement => {
     return (
         <Menu isLazy>
             <MenuButton>

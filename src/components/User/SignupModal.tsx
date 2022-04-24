@@ -37,6 +37,7 @@ import { signUpReq } from "../../api/auth";
 import { useQuery } from "react-query";
 import ErrorModal from "../UI/ErrorModal";
 import { showErrorModalAtom } from "../../store/UtilStore";
+import useSignup from "../../hooks/query/useSignup";
 
 export default function SignupModal() {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,8 +47,6 @@ export default function SignupModal() {
         useRecoilState(showSignupModalAtom);
     const [showErrorModal, setshowErrorModal] =
         useRecoilState(showErrorModalAtom);
-
-    const [token, setToken] = useRecoilState(userTokenAtom);
 
     const {
         formValue: firstNameValue,
@@ -96,32 +95,13 @@ export default function SignupModal() {
         setshowsignupModal(false);
     };
 
-    const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
-        "sign-up",
-        () =>
-            signUpReq(
-                firstNameValue,
-                lastNameValue,
-                emailValue,
-                passwordValue,
-                passwordRepeatValue
-            ),
-        {
-            enabled: false,
-            retry: 0,
-            onError: () => {
-                setshowErrorModal(true);
-            },
-        }
+    const {error,onSubmitHandler} = useSignup(
+        firstNameValue,
+        lastNameValue,
+        emailValue,
+        passwordValue,
+        passwordRepeatValue
     );
-
-    if (!isLoading && !error && data) {
-        setToken(data?.data?.token);
-    }
-
-    const onSubmitHandler = () => {
-        refetch();
-    };
 
     return (
         <>

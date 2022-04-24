@@ -18,17 +18,28 @@ import {
     ModalBody,
     FormErrorMessage,
 } from "@chakra-ui/react";
-import {useQuery} from 'react-query';
+import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import useForm from "../../hooks/useForm";
 import { showLoginModalAtom, showSignupModalAtom } from "../../store/authStore";
 import validator from "validator";
+import useLogin from "../../hooks/query/useLogin";
+import {
+    showErrorModalAtom,
+    showSuccessModalAtom,
+} from "../../store/UtilStore";
+import ErrorModal from "../UI/ErrorModal";
+import SuccessModal from "../UI/SuccessModal";
 
 export default function LoginModal() {
     const [showLoginModal, setshowLoginModal] =
         useRecoilState(showLoginModalAtom);
     const [showsignupModal, setshowsignupModal] =
         useRecoilState(showSignupModalAtom);
+    const [showErrorModal, setshowErrorModal] =
+        useRecoilState(showErrorModalAtom);
+    const [showSuccessModal, setshowSuccessModal] =
+        useRecoilState(showSuccessModalAtom);
 
     const {
         formValue: emailValue,
@@ -56,12 +67,15 @@ export default function LoginModal() {
         setshowLoginModal(false);
     };
 
-    useQuery()
+    const { errorString, correctString, onSubmitHandler } =
+        useLogin(emailValue, passwordValue);
 
     return (
         <Modal isOpen={showLoginModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
             <ModalContent>
+                {showErrorModal && <ErrorModal>{errorString}</ErrorModal>}
+                {showSuccessModal && <SuccessModal>{correctString}</SuccessModal>}
                 <ModalHeader>
                     <Heading fontSize={"4xl"} fontFamily={"mono"}>
                         Login💁‍♀️
@@ -127,6 +141,7 @@ export default function LoginModal() {
                                         _hover={{
                                             bg: "blue.500",
                                         }}
+                                        onClick={onSubmitHandler}
                                     >
                                         Login
                                     </Button>
