@@ -1,10 +1,16 @@
 import { atom, selector } from "recoil";
+import { fetchInitialCart } from "../api/cart";
 
-
+export const initialCart = selector({
+    key:"initialCart",
+    get: async ({get})=>{
+        return fetchInitialCart();
+    }
+})
 
 export const cartAtom = atom({
     key: "cartAtom",
-    default: [] as any[],
+    default: initialCart,
 });
 
 export const subTotalCartSelector = selector({
@@ -21,5 +27,15 @@ export const subTotalCartSelector = selector({
 
 export const cartOpenAtom = atom({
     key: "cartOpenAtom",
+    default: false,
+});
+
+export const fetchingCartAtom = atom({
+    key: "fetchingCartAtom",
+    default: false,
+});
+
+export const updatingCartAtom = atom({
+    key: "updatingCartAtom",
     default: false,
 });

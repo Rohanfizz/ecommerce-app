@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchCart, updateCart } from "../../api/cart";
 import { isLoggedInSelector, userTokenAtom } from "../../store/authStore";
-import { cartAtom } from "../../store/CartStore";
+import {
+    cartAtom,
+    fetchingCartAtom,
+    updatingCartAtom,
+} from "../../store/CartStore";
 import { productAtom } from "../../store/productStore";
 import { limitErrorModalShowAtom } from "../../store/UtilStore";
 
@@ -13,26 +17,34 @@ const useCart = () => {
     const [limitErrorModal, setLimitErrorModal] = useRecoilState(
         limitErrorModalShowAtom
     );
+    const [updatingCart, setupdatingCart] = useRecoilState(updatingCartAtom);
+    const [fetchingCart, setfetchingCart] = useRecoilState(fetchingCartAtom);
 
-    // const {
-    //     error: errorFetching,
-    //     refetch: refetchCart,
-    //     isSuccess: isSuccessFetching,
-    // } = useQuery("cart-fetch", fetchCart, {
-    //     retry: 0,
-    //     onSuccess: (data) => {
-    //         // console.log(data);
-    //     },
-    // });
+    const {
+        error: errorFetching,
+        refetch: refetchCart,
+        isSuccess: isSuccessFetching,
+    } = useQuery("cart-fetch", fetchCart, {
+        enabled: false,
+        retry: 0,
+        onSuccess: (data) => {
+            setCart(data?.data?.data?.cart?.products);
+            setfetchingCart(false);
+        },
+    });
+
+    // useEffect(() => {
+    //     refetchCart();
+    // }, []);
 
     const { refetch: updateCartQuery } = useQuery(
         "cart-update",
         () => updateCart(cart),
         {
-            enabled: isLoggedIn || false,
+            enabled: updatingCart,
             retry: 0,
             onSettled: (data) => {
-                console.log(data);
+                setupdatingCart(false);
             },
         }
     );
@@ -74,9 +86,8 @@ const useCart = () => {
                 quantity: 1,
             });
         }
-        // make call to backend here    TODO:
         setCart(updatedItems);
-        updateCartQuery();
+        setupdatingCart(true);
     };
 
     const deleteFromCartHandler = (item_id: string) => {
@@ -88,7 +99,7 @@ const useCart = () => {
 
         // TODO: BACKEND CALL
         setCart(updatedItems);
-        updateCartQuery();
+        setupdatingCart(true);
     };
     return {
         editCartHandler,

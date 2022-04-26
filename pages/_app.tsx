@@ -6,19 +6,21 @@ import Layout from "../src/components/UI/Layout";
 import { RecoilRoot } from "recoil";
 import { AnimateSharedLayout } from "framer-motion";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactQueryDevtools } from "react-query/devtools";
+import RecoilNexus from "recoil-nexus";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     const queryClient = new QueryClient();
     return (
         <RecoilRoot>
+            <RecoilNexus />
             <QueryClientProvider client={queryClient}>
                 <ChakraProvider theme={theme1}>
                     <Layout>
                         <Component {...pageProps} />
                     </Layout>
                 </ChakraProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
+                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </RecoilRoot>
     );
