@@ -1,4 +1,4 @@
-import { Flex, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon, IconButton } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 
 import React from "react";
@@ -14,6 +14,7 @@ import {
 import LoginModal from "../User/LoginModal";
 import SignupModal from "../User/SignupModal";
 import UserMenu from "../User/UserMenu";
+import { on } from "events";
 
 const hoverCss = {
     cursor: "pointer",
@@ -52,23 +53,31 @@ function NavUtilLogos() {
         >
             <NavbarCartLogo />
             {!isLoggedIn && (
-                <Icon
-                    as={FaUser}
-                    _hover={hoverCss}
-                    onClick={userIconClickHandler}
+                // <Box border="1px">
+                //     <Icon
+                //         as={FaUser}
+                //         _hover={hoverCss}
+                //         onClick={userIconClickHandler}
+                //     />
+                // </Box>
+                <IconButton
+                    aria-label="user-icon"
+                    icon={
+                        <Icon
+                            as={FaUser}
+                            _hover={hoverCss}
+                            onClick={userIconClickHandler}
+                        />
+                    }
+                    // variant={'outline'}
+                    fontSize="1.6rem"
+                    colorScheme="teal.100"
                 />
             )}
+
             {showLoginModal && !isLoggedIn && <LoginModal />}
             {showSignUpmodal && !isLoggedIn && <SignupModal />}
-            {isLoggedIn && (
-                <UserMenu>
-                    <Icon
-                        as={FaUser}
-                        _hover={hoverCss}
-                        onClick={userIconClickHandler}
-                    />
-                </UserMenu>
-            )}
+            {isLoggedIn && <UserMenu onClick={userIconClickHandler} />}
         </Flex>
     );
 }

@@ -1,12 +1,14 @@
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { signUpReq } from "../../api/auth";
-import { userTokenAtom } from "../../store/authStore";
-import { showErrorModalAtom } from "../../store/UtilStore";
+import { createNewCart } from "../../api/cart";
+import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
+import { cartAtom } from "../../store/CartStore";
+import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
 
-interface Query{
-    refetch:any
-    error:any
+interface Query {
+    refetch: any;
+    error: any;
 }
 
 const useSignup = (
@@ -19,8 +21,17 @@ const useSignup = (
     const [showErrorModal, setshowErrorModal] =
         useRecoilState(showErrorModalAtom);
     const [token, setToken] = useRecoilState(userTokenAtom);
+    const [userUUID, setuserUUID] = useRecoilState(userUUIDAtom);
+    const cart = useRecoilValue(cartAtom);
+    const [errorText, setErrorText] = useRecoilState(errorTextAtom);
 
-    const { error, refetch }:Query = useQuery(
+    const { error: createCartError, refetch: refetchCart }: Query = useQuery(
+        "create-new-cart",
+        () => createNewCart(cart),
+        { enabled: false }
+    );
+
+    const { error, refetch }: Query = useQuery(
         "sign-up",
         () =>
             signUpReq(
@@ -34,10 +45,16 @@ const useSignup = (
             enabled: false,
             retry: 0,
             onError: () => {
+                const errorString = error?.response?.data?.error?.code === 11000
+                ? "Account With Email Already Exists!"
+                : "Please enter valid data";
+                setErrorText(errorString);
                 setshowErrorModal(true);
             },
             onSettled: (data) => {
                 setToken(data?.data?.token);
+                setuserUUID(data?.data?.data?.uuid);
+                refetchCart();
             },
         }
     );
@@ -45,6 +62,6 @@ const useSignup = (
     const onSubmitHandler = () => {
         refetch();
     };
-    return {error,onSubmitHandler}
+    return { error, onSubmitHandler };
 };
 export default useSignup;

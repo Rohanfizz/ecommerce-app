@@ -2,15 +2,15 @@ import { Button } from "@chakra-ui/react";
 import React from "react";
 import { BsCartPlusFill } from "react-icons/bs";
 import { useRecoilValue } from "recoil";
-import useCart from "../../hooks/useCart";
+import useCart from "../../hooks/query/useCart";
 
 
 const AddToCartButton: React.FC<{ product: any }> = ({ product }) => {
     const { editCartHandler } = useCart();
-
+// console.log(product);
     const addToCartHandler = () => {
         editCartHandler(
-            product.uuid,
+            product._id,
             product.name,
             product.productImage[0],
             product.price,

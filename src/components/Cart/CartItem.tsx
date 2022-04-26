@@ -16,7 +16,7 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
 import { useRecoilState } from "recoil";
-import useCart from "../../hooks/useCart";
+import useCart from "../../hooks/query/useCart";
 import { cartOpenAtom } from "../../store/CartStore";
 
 const optionButtons = {
@@ -34,7 +34,7 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
     const addToCartHandler = (e: any) => {
         if (e.target.disabled) return;
         editCartHandler(
-            product.uuid,
+            product.productId,
             product.name,
             product.productImage[0],
             product.price,
@@ -44,7 +44,7 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
     const subtractFromCartHandler = (e: any) => {
         console.log("asdas");
         editCartHandler(
-            product.uuid,
+            product.productId,
             product.name,
             product.productImage[0],
             product.price,
@@ -53,12 +53,12 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
     };
 
     const removeCartHandler = () => {
-        deleteFromCartHandler(product.uuid);
+        deleteFromCartHandler(product.productId);
     };
 
     const viewClickHandler = () => {
         setCartIsOpen(false);
-        router.push(`/product/${product.uuid}`);
+        router.push(`/product/${product.productId}`);
     };
 
     return (

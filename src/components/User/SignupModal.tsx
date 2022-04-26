@@ -95,7 +95,7 @@ export default function SignupModal() {
         setshowsignupModal(false);
     };
 
-    const {error,onSubmitHandler} = useSignup(
+    const {onSubmitHandler} = useSignup(
         firstNameValue,
         lastNameValue,
         emailValue,
@@ -109,11 +109,7 @@ export default function SignupModal() {
                 <ModalOverlay />
                 <ModalContent>
                     {showErrorModal && (
-                        <ErrorModal>
-                            {error?.response?.data?.error?.code === 11000
-                                ? "Account With Email Already Exists!"
-                                : "Please enter valid data"}
-                        </ErrorModal>
+                        <ErrorModal/>
                     )}
                     <ModalHeader>
                         <Heading fontSize={"4xl"} fontFamily={"mono"}>

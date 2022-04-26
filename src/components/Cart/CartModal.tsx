@@ -49,9 +49,9 @@ const CartModal: React.FC = () => {
     const [cart, setCart] = useRecoilState(cartAtom);
     const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
 
-    useEffect(() => {
-        setCart(cartItems);
-    }, []);
+    // useEffect(() => {
+    //     setCart(cartItems);
+    // }, []);
     return (
         <>
             {/* <Button onClick={onOpen}>Open Modal</Button> */}

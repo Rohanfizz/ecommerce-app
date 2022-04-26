@@ -11,8 +11,9 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
+    errorTextAtom,
     limitErrorModalShowAtom,
     showErrorModalAtom,
 } from "../../store/UtilStore";
@@ -25,6 +26,7 @@ const ErrorModal= (props:any) => {
     const onCloseHandler = () => {
         setshowErrorModal(false);
     };
+    const errorText = useRecoilValue(errorTextAtom);
     // useEffect(() => {
     //     const timer = setInterval(() => {
     //         setshowErrorModal(false);
@@ -41,7 +43,7 @@ const ErrorModal= (props:any) => {
                 {/* <ModalOverlay /> */}
                 <ModalContent maxW="45rem" bg="red.400" color="white">
                     <ModalHeader>
-                       {props.children}
+                       {errorText}
                     </ModalHeader>
                     <ModalCloseButton _focus={{ outline: "0" }} />
                 </ModalContent>

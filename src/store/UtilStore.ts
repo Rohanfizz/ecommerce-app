@@ -19,3 +19,12 @@ export const showSuccessModalAtom = atom({
     key: "showSuccessModalAtom",
     default: false,
 });
+
+export const errorTextAtom = atom({
+    key:"errorText",
+    default: "",
+})
+export const successTextAtom = atom({
+    key:"successText",
+    default: "",
+})

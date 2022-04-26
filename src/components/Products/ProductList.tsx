@@ -1,12 +1,15 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { productSelector } from "../../store/productStore";
+import useProduct from "../../hooks/query/useProduct";
+import { productAtom } from "../../store/productStore";
 import ProductCard from "./Product/ProductCard";
 
 
 function ProductList() {
-    const productList = useRecoilValue(productSelector);
+    const productList = useRecoilValue(productAtom);
+    useProduct();
+    
     return (
         <Flex
             h="100%"

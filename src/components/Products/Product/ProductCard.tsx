@@ -15,22 +15,10 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import { BsCartPlusFill } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
-import useCart from "../../../hooks/useCart";
+import useCart from "../../../hooks/query/useCart";
 import AddToCartButton from "../../Cart/AddToCartButton";
 
 const ProductCard: React.FC<{ product: any }> = ({ product }) => {
-    // uuid: "asdasd",
-    //     name: "Makeup Revolution Maxi Reloaded Palette Large It Up, Multicolor, 60 g",
-    //     primaryCategory: "Spray",
-    //     ratingNumber: 4,
-    //     reviewCount: 264,
-    //     price: 1299,
-    //     stockStatus: true,
-    //     productImage: [
-    //         "https://m.media-amazon.com/images/I/91zfFbCp7eL._AC_UL320_.jpg",
-    //         "https://m.media-amazon.com/images/I/91XD5PkJVgL._AC_UL320_.jpg",
-    //         "https://m.media-amazon.com/images/I/91KeBvIAECL._AC_UL320_.jpg",
-    //     ],
 
     const router = useRouter();
 

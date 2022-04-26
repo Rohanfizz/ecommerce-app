@@ -67,15 +67,19 @@ export default function LoginModal() {
         setshowLoginModal(false);
     };
 
-    const { errorString, correctString, onSubmitHandler } =
-        useLogin(emailValue, passwordValue);
+    const { correctString, onSubmitHandler } = useLogin(
+        emailValue,
+        passwordValue
+    );
 
     return (
         <Modal isOpen={showLoginModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
             <ModalContent>
-                {showErrorModal && <ErrorModal>{errorString}</ErrorModal>}
-                {showSuccessModal && <SuccessModal>{correctString}</SuccessModal>}
+                {showErrorModal && <ErrorModal />}
+                {showSuccessModal && (
+                    <SuccessModal>{correctString}</SuccessModal>
+                )}
                 <ModalHeader>
                     <Heading fontSize={"4xl"} fontFamily={"mono"}>
                         Login💁‍♀️
