@@ -2,6 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import BottomBar from "../NavBar/BottomBar";
 import Navbar from "../NavBar/Navbar";
+import InitialFetching from "../Util/InitialFetching";
 
 const Layout = (props: any) => {
     return (
@@ -12,6 +13,7 @@ const Layout = (props: any) => {
             w="100%"
             bgColor="back1"
         >
+            
             <Navbar />
             <Box 
             minH="calc( 100vh - 4.5rem - 7rem)" 

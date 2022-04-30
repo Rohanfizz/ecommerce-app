@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { signUpReq } from "../../api/auth";
 import { createNewCart } from "../../api/cart";
 import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
-import { cartAtom } from "../../store/CartStore";
+import { cartAtom, subTotalCartAtom } from "../../store/CartStore";
 import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
 
 interface Query {
@@ -24,10 +24,10 @@ const useSignup = (
     const [userUUID, setuserUUID] = useRecoilState(userUUIDAtom);
     const cart = useRecoilValue(cartAtom);
     const [errorText, setErrorText] = useRecoilState(errorTextAtom);
-
+    const subtotal = useRecoilValue(subTotalCartAtom);
     const { error: createCartError, refetch: refetchCart }: Query = useQuery(
-        "create-new-cart",
-        () => createNewCart(cart),
+        "create-new-cart",  
+        () => createNewCart(cart,subtotal),
         { enabled: false }
     );
 

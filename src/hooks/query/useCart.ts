@@ -6,40 +6,33 @@ import { isLoggedInSelector, userTokenAtom } from "../../store/authStore";
 import {
     cartAtom,
     fetchingCartAtom,
+    subTotalCartAtom,
     updatingCartAtom,
 } from "../../store/CartStore";
 import { productAtom } from "../../store/productStore";
 import { limitErrorModalShowAtom } from "../../store/UtilStore";
 
+const subtotalCalc = (updatedItems: any[]) => {
+    let subtotal = 0;
+    updatedItems.forEach((ele) => {
+        subtotal += ele.product.price * ele.quantity;
+    });
+
+    return subtotal;
+};
+
 const useCart = () => {
     const [cart, setCart] = useRecoilState(cartAtom);
+    const [subtotal, setSubtotal] = useRecoilState(subTotalCartAtom);
     const isLoggedIn = useRecoilValue(isLoggedInSelector);
     const [limitErrorModal, setLimitErrorModal] = useRecoilState(
         limitErrorModalShowAtom
     );
     const [updatingCart, setupdatingCart] = useRecoilState(updatingCartAtom);
-    const [fetchingCart, setfetchingCart] = useRecoilState(fetchingCartAtom);
-
-    const {
-        error: errorFetching,
-        refetch: refetchCart,
-        isSuccess: isSuccessFetching,
-    } = useQuery("cart-fetch", fetchCart, {
-        enabled: false,
-        retry: 0,
-        onSuccess: (data) => {
-            setCart(data?.data?.data?.cart?.products);
-            setfetchingCart(false);
-        },
-    });
-
-    // useEffect(() => {
-    //     refetchCart();
-    // }, []);
 
     const { refetch: updateCartQuery } = useQuery(
         "cart-update",
-        () => updateCart(cart),
+        () => updateCart(cart.products, cart.subtotal),
         {
             enabled: updatingCart,
             retry: 0,
@@ -52,15 +45,17 @@ const useCart = () => {
     const editCartHandler = (
         item_id: string,
         name: string,
-        productImage: string,
+        productImage: string[],
         price: number,
         action: number // 1 | -1
     ) => {
         // check for existance
-        const existCartItemIndex = cart.findIndex((product: any) => {
-            return product.productId === item_id;
+        // console.log(cart);
+        const existCartItemIndex = cart.products.findIndex((product: any) => {
+            return product.product._id === item_id;
         });
-        const existCartItem = cart[existCartItemIndex];
+
+        const existCartItem = cart.products[existCartItemIndex];
 
         let updatedItems;
 
@@ -69,44 +64,50 @@ const useCart = () => {
                 setLimitErrorModal(true);
                 return;
             }
-
             const updatedItem = {
                 ...existCartItem,
                 quantity: existCartItem.quantity + action,
             };
-            updatedItems = [...cart];
+            updatedItems = [...cart?.products];
             updatedItems[existCartItemIndex] = updatedItem;
         } else {
-            updatedItems = [...cart];
+            updatedItems = [...cart?.products];
             updatedItems.push({
-                productId: item_id,
-                name,
-                productImage,
-                price,
+                product: {
+                    _id: item_id,
+                    name,
+                    productImage,
+                    price,
+                },
                 quantity: 1,
             });
         }
-        setCart(updatedItems);
+        const subtotal = subtotalCalc(updatedItems);
+        const newCart = { products: updatedItems, subtotal: subtotal };
+        // setSubtotal(subtotal);
+        // console.log(newCart);
+        setCart(newCart);
         setupdatingCart(true);
     };
 
     const deleteFromCartHandler = (item_id: string) => {
-        let updatedItems = [...cart];
+        let updatedItems = [...cart.products];
 
         updatedItems = updatedItems.filter((product: any) => {
-            return product.productId !== item_id;
+            return product.product._id !== item_id;
         });
 
         // TODO: BACKEND CALL
-        setCart(updatedItems);
+        const subtotal = subtotalCalc(updatedItems);
+        const newCart = { products: updatedItems, subtotal: subtotal };
+        setSubtotal(subtotal);
+        setCart(newCart);
         setupdatingCart(true);
     };
     return {
         editCartHandler,
         deleteFromCartHandler,
-        // errorFetching,
-        // refetchCart,
-        // isSuccessFetching,
+        cart,
     };
 };
 

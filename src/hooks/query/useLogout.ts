@@ -1,4 +1,6 @@
+import localforage from "localforage";
 import { useRecoilState } from "recoil";
+import Cart from "../../Models/cartModel";
 import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
 import { cartAtom } from "../../store/CartStore";
 
@@ -8,9 +10,13 @@ const useLogout = () =>{
     const [cart,setCart] = useRecoilState(cartAtom);
 
     const logoutFn = ()=>{
-        setToken(null);
+        const fn = async()=>{
+            setToken(null);
         setuserUUID(null);
-        setCart([]);
+        setCart(new Cart());
+        await localforage.removeItem('userToken');
+        }
+        fn();
     }
     return {logoutFn};
 }

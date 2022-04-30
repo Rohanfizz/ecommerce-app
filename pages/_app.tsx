@@ -8,18 +8,30 @@ import { AnimateSharedLayout } from "framer-motion";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import RecoilNexus from "recoil-nexus";
-
+import useInitialFetch from "../src/hooks/query/useInitialFetch";
+import InitialFetching from "../src/components/Util/InitialFetching";
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            cacheTime: 1000 * 60 * 5,
+            retry: false,
+            refetchOnWindowFocus: false,
+            staleTime: 0,
+        },
+    },
+});
 const MyApp = ({ Component, pageProps }: AppProps) => {
-    const queryClient = new QueryClient();
     return (
         <RecoilRoot>
             <RecoilNexus />
             <QueryClientProvider client={queryClient}>
-                <ChakraProvider theme={theme1}>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                </ChakraProvider>
+                <InitialFetching>
+                    <ChakraProvider theme={theme1}>
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </ChakraProvider>
+                </InitialFetching>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </RecoilRoot>

@@ -17,10 +17,18 @@ import {
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
+import { useRecoilValue } from "recoil";
+import Cart, { CartProduct } from "../../Models/cartModel";
+import { cartAtom } from "../../store/CartStore";
 import CartItem from "./CartItem";
 import YourCartIsEmpty from "./YourCartIsEmpty";
 
-const ItemsViewer: React.FC<{ items: any }> = ({ items }) => {
+const ItemsViewer: React.FC<{ cart: Cart; editItem: any; deleteItem: any }> = ({
+    cart,
+    editItem,
+    deleteItem,
+}) => {
+    // const cart = useRecoilValue(cartAtom);
     return (
         <Box
             h="100%"
@@ -37,10 +45,19 @@ const ItemsViewer: React.FC<{ items: any }> = ({ items }) => {
                     "scrollbar-width": "none" /* Firefox */,
                 },
             }}
-        >   
-        {items.length === 0 && <YourCartIsEmpty/>}
-            {items.map((item: any, idx: number) => {
-                return <CartItem product={item} key={idx} />;
+        >
+            {cart.products.length === 0 && <YourCartIsEmpty />}
+            {cart.products.map((item: CartProduct, idx: number) => {
+                // console.log(item);
+                return (
+                    <CartItem
+                        product={item.product}
+                        quantity={item.quantity}
+                        key={idx}
+                        editItem={editItem}
+                        deleteItem={deleteItem}
+                    />
+                );
             })}
         </Box>
     );

@@ -1,25 +1,29 @@
 import axios from "axios";
-import { getRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
+import Cart from "../Models/cartModel";
 import { userTokenAtom } from "../store/authStore";
+import { cartAtom } from "../store/CartStore";
 import { AxiosAuth } from "./util";
 
-const convertToBackendCart = (cart) => {
-    const upCart = cart.map((product) => {
-        return { product: product.productId, quantity: product.quantity };
+const convertToBackendCart = (products, subtotal) => {
+    // console.log(products);
+    const upCart = products.map((product) => {
+        return { product: product.product._id, quantity: product.quantity };
     });
-    return { products: upCart };
+    const completeUpCart =  {products: upCart, subtotal };
+    return completeUpCart;
 };
 
 export const fetchInitialCart = async () => {
-    let cart;
+    let cart: any;
     try {
         cart = await axios.get(`${process.env.BACKEND_URL}api/v1/cart`, {
             headers: { Authorization: "Bearer " + getRecoil(userTokenAtom) },
         });
-        return cart?.data?.data?.cart?.products;
+        // console.log(cart?.data?.data?.cart);
+        setRecoil(cartAtom, cart?.data?.data?.cart);
     } catch (err) {
-        console.log(err);
-        return [];
+        setRecoil(cartAtom, new Cart());
     }
 };
 
@@ -30,27 +34,36 @@ export const fetchCart = () => {
         })
         .then((res) => {
             return res;
-        });
+        })
+        .catch((err) => console.log(err.response));
 };
 
-export const createNewCart = (cart: any) => {
-    const upCart = convertToBackendCart(cart);
+export const createNewCart = (cart, subtotal: Number) => {
+    const upCart = convertToBackendCart(cart, subtotal);
     return axios
-        .post(`${process.env.BACKEND_URL}api/v1/cart/create`, upCart)
+        .post(`${process.env.BACKEND_URL}api/v1/cart/create`, upCart, {
+            headers: { Authorization: "Bearer " + getRecoil(userTokenAtom) },
+        })
         .then((res) => {
             return res;
+        })
+        .catch((err) => {
+            console.log(err.response);
         });
 };
 
-export const updateCart = (cart: any) => {
-    const upCart = convertToBackendCart(cart);
-    console.log(JSON.stringify(upCart));
+export const updateCart = (cart: any, subtotal: Number) => {
+    const upCart = convertToBackendCart(cart, subtotal);
+    // console.log(JSON.stringify(upCart));
     return axios
         .patch(`${process.env.BACKEND_URL}api/v1/cart/update`, upCart, {
             headers: { Authorization: "Bearer " + getRecoil(userTokenAtom) },
         })
         .then((res) => {
             return res;
+        })
+        .catch((err) => {
+            console.log(err.response);
         });
     // return AxiosAuth.patch('/cart/update',upCart).then((res)=>res);
 };

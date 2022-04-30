@@ -3,16 +3,17 @@ import React from "react";
 import { BsCartPlusFill } from "react-icons/bs";
 import { useRecoilValue } from "recoil";
 import useCart from "../../hooks/query/useCart";
+import { SingleCartProduct } from "../../Models/cartModel";
 
 
-const AddToCartButton: React.FC<{ product: any }> = ({ product }) => {
+const AddToCartButton: React.FC<{ product: SingleCartProduct }> = ({ product }) => {
     const { editCartHandler } = useCart();
 // console.log(product);
     const addToCartHandler = () => {
         editCartHandler(
             product._id,
             product.name,
-            product.productImage[0],
+            product.productImage,
             product.price,
             1
         );

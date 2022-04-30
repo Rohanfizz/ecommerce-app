@@ -15,9 +15,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
-import { useRecoilState } from "recoil";
-import useCart from "../../hooks/query/useCart";
-import { cartOpenAtom } from "../../store/CartStore";
 
 const optionButtons = {
     // border: "1px",
@@ -27,40 +24,43 @@ const optionButtons = {
     _focus: { outline: "none" },
 };
 
-const CartItem: React.FC<{ product: any }> = ({ product }) => {
-    const { editCartHandler, deleteFromCartHandler } = useCart();
-    const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
+const CartItem: React.FC<{
+    product: any;
+    quantity: any;
+    editItem: any;
+    deleteItem: any;
+}> = ({ product, quantity, editItem, deleteItem }) => {
+    // const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
     const router = useRouter();
     const addToCartHandler = (e: any) => {
         if (e.target.disabled) return;
-        editCartHandler(
-            product.productId,
+        editItem(
+            product._id,
             product.name,
-            product.productImage[0],
+            product.productImage,
             product.price,
             1
         );
     };
     const subtractFromCartHandler = (e: any) => {
-        console.log("asdas");
-        editCartHandler(
-            product.productId,
+        editItem(
+            product._id,
             product.name,
-            product.productImage[0],
+            product.productImage,
             product.price,
             -1
         );
     };
 
     const removeCartHandler = () => {
-        deleteFromCartHandler(product.productId);
+        deleteItem(product._id);
     };
 
     const viewClickHandler = () => {
-        setCartIsOpen(false);
-        router.push(`/product/${product.productId}`);
+        // setCartIsOpen(false);
+        router.push(`/product/${product._id}`);
     };
-
+    // return <></>
     return (
         <Grid
             // h='10rem'
@@ -77,15 +77,14 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
             <GridItem rowSpan={2} colSpan={2}>
                 <Image
                     alt={"product image"}
-                    src={product.productImage}
-                    // objectFit="inherit"
+                    src={product?.productImage[0]}
                     objectFit="scale-down"
                     h="100%"
                     w="100%"
                 />
             </GridItem>
             <GridItem colSpan={3} p="1" fontWeight={"410"}>
-                <Text>{product.name}</Text>
+                <Text>{product?.name}</Text>
             </GridItem>
             <GridItem colSpan={2} rowSpan={2}>
                 <Button
@@ -122,11 +121,11 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
                     w="100%"
                 >
                     <NumberInput
-                        defaultValue={product.quantity}
+                        defaultValue={quantity}
                         w="90%"
                         min={1}
                         max={20}
-                        value={product.quantity}
+                        value={quantity}
                     >
                         <NumberInputField readOnly />
                         <NumberInputStepper>
@@ -147,7 +146,7 @@ const CartItem: React.FC<{ product: any }> = ({ product }) => {
                     {"Price: "}
                     <Text as="i" fontSize="2xl">
                         {"₹"}
-                        {product.price * product.quantity}
+                        {product?.price * quantity}
                     </Text>
                     {"/-"}
                 </Text>

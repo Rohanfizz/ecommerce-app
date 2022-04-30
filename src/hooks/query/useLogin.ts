@@ -1,8 +1,10 @@
 import axios from "axios";
+import localforage from "localforage";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { loginReq } from "../../api/auth";
 import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
+import { fetchingCartAtom } from "../../store/CartStore";
 import {
     errorTextAtom,
     showErrorModalAtom,
@@ -16,6 +18,7 @@ interface Query {
 }
 
 const useLogin = (email: string, password: string) => {
+    const [fetchingCart, setfetchingCart] = useRecoilState(fetchingCartAtom);
     const [showErrorModal, setshowErrorModal] =
         useRecoilState(showErrorModalAtom);
     const [showSuccessModal, setshowSuccessModal] =
@@ -38,9 +41,11 @@ const useLogin = (email: string, password: string) => {
                 setErrorText(errorString);
                 setshowErrorModal(true);
             },
-            onSettled: (data) => {
+            onSettled: async (data) => {
                 setToken(data?.data?.token);
+                await localforage.setItem("userToken", data?.data?.token);
                 setuserUUID(data?.data?.data?.uuid);
+                setfetchingCart(true);
             },
         }
     );

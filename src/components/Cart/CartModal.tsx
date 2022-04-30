@@ -14,6 +14,8 @@ import {
 import React, { useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { useRecoilState } from "recoil";
+import useCart from "../../hooks/query/useCart";
+import Cart from "../../Models/cartModel";
 import { cartAtom, cartOpenAtom } from "../../store/CartStore";
 import CartContent from "./CartContent";
 
@@ -42,13 +44,12 @@ const cartItems = [
         quantity: 5,
         price: 1234,
     },
-   
 ];
 
 const CartModal: React.FC = () => {
-    const [cart, setCart] = useRecoilState(cartAtom);
+    // const [cart, setCart] = useRecoilState(cartAtom);
     const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
-
+    const { editCartHandler, deleteFromCartHandler, cart } = useCart();
     // useEffect(() => {
     //     setCart(cartItems);
     // }, []);
@@ -70,14 +71,20 @@ const CartModal: React.FC = () => {
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody borderBottom="1px solid skyblue">
-                        <CartContent items={cart} />
+                        <CartContent
+                            cart={cart}
+                            editItem={editCartHandler}
+                            deleteItem={deleteFromCartHandler}
+                        />
                     </ModalBody>
 
                     <ModalFooter>
                         <Button
                             mr={3}
                             variant="solid"
-                            onClick={() => setCartIsOpen(false)}
+                            onClick={() => {
+                                setCartIsOpen(false);
+                            }}
                         >
                             Close
                         </Button>

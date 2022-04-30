@@ -41,7 +41,7 @@ export const isLoggedInSelector = selector({
     key: "isLoggedInSelector",
     get: ({ get }) => {
         const userToken = get(userTokenAtom);
-        return userToken && userToken != "";
+        return (userToken!=null && userToken != "");
     },
     
 });

@@ -1,28 +1,27 @@
-import { atom, selector } from "recoil";
-import { fetchInitialCart } from "../api/cart";
+import { atom, RecoilState, selector } from "recoil";
+import { setRecoil } from "recoil-nexus";
+import Cart from "../Models/cartModel";
 
-export const initialCart = selector({
-    key:"initialCart",
-    get: async ({get})=>{
-        return fetchInitialCart();
-    }
-})
-
-export const cartAtom = atom({
+export const cartAtom = atom<Cart>({
     key: "cartAtom",
-    default: initialCart,
+    default: new Cart(),
+    // effects: [
+    //     ({ onSet }) => {
+    //         onSet((newValue) => {
+    //             let subtotal = 0;
+    //             newValue.forEach((item: any) => {
+    //                 subtotal += item.product.quantity * item.product.price;
+    //             });
+    //             console.log(subtotal);
+    //             setRecoil(subTotalCartAtom,subtotal);
+    //         });
+    //     },
+    // ],
 });
 
-export const subTotalCartSelector = selector({
+export const subTotalCartAtom = atom({
     key: "subTotalCartState",
-    get: ({ get }) => {
-        const cart = get(cartAtom);
-        let subtotal = 0;
-        cart.forEach((item: any) => {
-            subtotal += item.quantity * item.price;
-        });
-        return subtotal;
-    },
+    default: 0,
 });
 
 export const cartOpenAtom = atom({
