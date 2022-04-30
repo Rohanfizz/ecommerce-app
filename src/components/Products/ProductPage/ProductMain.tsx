@@ -1,5 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
+import useProduct from "../../../hooks/query/useProduct";
+import useProducts from "../../../hooks/query/useProducts";
 import DescriptionSection from "./DescriptionSection";
 import ImageViewer from "./ImageViewer";
 import ProductInfoTable from "./ProductInfoTable";
@@ -13,6 +15,7 @@ const ProductMain: React.FC<{ product: any }> = ({ product }) => {
             templateRows="repeat(11, 1fr)"
             templateColumns="repeat(9, 1fr)"
             gap={2}
+            border='1px'
         >
             <GridItem rowSpan={8} colSpan={4} h="40rem">
                 <ImageViewer images={product.productImage} />

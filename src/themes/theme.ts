@@ -6,7 +6,8 @@ export const theme1 = extendTheme({
         primaryDark:'#0987A0',
         primary2: "#0BC5EA",
         primary3: "#C4F1F9",
-        back1: "#B2F5EA",
+        back1: "rgba(192, 252, 242, 1)",
+        // back1: "#C0FCF2",
         txt1: "gray.50",
         yellow: "yellow.200",
         ratingStar: "#D69E2E"

@@ -2,7 +2,6 @@ import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import BottomBar from "../NavBar/BottomBar";
 import Navbar from "../NavBar/Navbar";
-import InitialFetching from "../Util/InitialFetching";
 
 const Layout = (props: any) => {
     return (
@@ -13,16 +12,16 @@ const Layout = (props: any) => {
             w="100%"
             bgColor="back1"
         >
-            
             <Navbar />
-            <Box 
-            minH="calc( 100vh - 4.5rem - 7rem)" 
-            w="90vw" minW="90rem" p="1rem">
+            <Box
+                minH="calc( 100vh - 4.5rem - 6rem)"
+                w="90vw"
+                minW="90rem"
+                p="1rem"
+            >
                 {props.children}
             </Box>
-            {/* <Box> */}
-                <BottomBar/>
-            {/* </Box> */}
+            <BottomBar />
         </Flex>
     );
 };

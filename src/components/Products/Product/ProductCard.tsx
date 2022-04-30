@@ -30,7 +30,7 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
     }
 
     const productClickHandler = () => {
-        router.push(`/product/${product.uuid}`);
+        router.push(`/product/${product._id}`);
     };
 
     return (

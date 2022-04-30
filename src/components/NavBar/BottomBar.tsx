@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 
 function BottomBar() {
   return (
-    <Box h="7rem" bg="skyblue" w="100%"></Box>
+    <Box h="6rem" bg="skyblue" w="100%"></Box>
   )
 }
 

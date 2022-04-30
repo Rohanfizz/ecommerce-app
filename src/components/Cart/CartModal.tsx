@@ -11,6 +11,7 @@ import {
     ModalOverlay,
     useDisclosure,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { useRecoilState } from "recoil";
@@ -50,9 +51,11 @@ const CartModal: React.FC = () => {
     // const [cart, setCart] = useRecoilState(cartAtom);
     const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
     const { editCartHandler, deleteFromCartHandler, cart } = useCart();
-    // useEffect(() => {
-    //     setCart(cartItems);
-    // }, []);
+    const router = useRouter();
+    const checkoutHandler = ()=>{
+        setCartIsOpen(false);
+        router.push('/checkout');
+    }
     return (
         <>
             {/* <Button onClick={onOpen}>Open Modal</Button> */}
@@ -88,7 +91,7 @@ const CartModal: React.FC = () => {
                         >
                             Close
                         </Button>
-                        <Button colorScheme="blue">Checkout</Button>
+                        <Button colorScheme="blue" onClick={checkoutHandler}>Checkout</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

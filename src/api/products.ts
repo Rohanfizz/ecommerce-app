@@ -5,3 +5,7 @@ export const fetchProducts = ()=>{
         return res;
     });
 }
+export const fetchProductById= async (pid:string)=>{
+    const productData = await axios.get(`${process.env.BACKEND_URL}api/v1/products/${pid}`);
+    return productData.data.data;
+}

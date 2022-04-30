@@ -84,7 +84,7 @@ const CartItem: React.FC<{
                 />
             </GridItem>
             <GridItem colSpan={3} p="1" fontWeight={"410"}>
-                <Text>{product?.name}</Text>
+                <Text noOfLines={4}>{product?.name}</Text>
             </GridItem>
             <GridItem colSpan={2} rowSpan={2}>
                 <Button

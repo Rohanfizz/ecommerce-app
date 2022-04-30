@@ -1,26 +1,16 @@
 import { useQuery } from "react-query";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
+import { fetchProductById } from "../../api/products";
 import { useRecoilState } from "recoil";
-import { fetchProducts } from "../../api/products";
-import { productAtom } from "../../store/productStore";
-import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
+import { fetchinProductByIdAtom } from "../../store/productStore";
 
 const useProduct = () => {
-    const [products, setProducts] = useRecoilState(productAtom);
-    const [showErrorModal, setshowErrorModal] =
-        useRecoilState(showErrorModalAtom);
-    const [errorText, setErrorText] = useRecoilState(errorTextAtom);
-
-    useQuery("fetch-all-products", fetchProducts, {
-        retry:0,
-        onError: () => {
-            setErrorText("There was a problem fetching products...");
-            setshowErrorModal(true);
-        },
-        onSettled: (data) => {
-            // console.log(data?.data?.data?.data);
-            setProducts(data?.data?.data?.data);
-        },
-    });
+    
+    
 };
+
+
 
 export default useProduct;
