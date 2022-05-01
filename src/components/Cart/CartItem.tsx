@@ -39,6 +39,7 @@ const CartItem: React.FC<{
             product.name,
             product.productImage,
             product.price,
+            product.tax,
             1
         );
     };
@@ -48,6 +49,7 @@ const CartItem: React.FC<{
             product.name,
             product.productImage,
             product.price,
+            product.tax,
             -1
         );
     };

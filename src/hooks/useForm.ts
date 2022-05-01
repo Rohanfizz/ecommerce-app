@@ -13,7 +13,6 @@ const useForm = (validatorFunction: (data: any) => boolean) => {
 
         // setIsTouched(true);
     };
-
     const isError = !(!isTouched || validatorFunction(formValue));
     // setWrongValue(!isCorrect);
 

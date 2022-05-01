@@ -5,7 +5,7 @@ import { userTokenAtom } from "../store/authStore";
 import { cartAtom } from "../store/CartStore";
 import { AxiosAuth } from "./util";
 
-const convertToBackendCart = (products, subtotal) => {
+export const convertToBackendCart = (products, subtotal) => {
     // console.log(products);
     const upCart = products.map((product) => {
         return { product: product.product._id, quantity: product.quantity };

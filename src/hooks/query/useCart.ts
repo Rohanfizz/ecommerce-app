@@ -47,6 +47,7 @@ const useCart = () => {
         name: string,
         productImage: string[],
         price: number,
+        tax,
         action: number // 1 | -1
     ) => {
         // check for existance
@@ -78,6 +79,7 @@ const useCart = () => {
                     name,
                     productImage,
                     price,
+                    tax
                 },
                 quantity: 1,
             });

@@ -15,6 +15,7 @@ const AddToCartButton: React.FC<{ product: SingleCartProduct }> = ({ product }) 
             product.name,
             product.productImage,
             product.price,
+            product.tax,
             1
         );
     };

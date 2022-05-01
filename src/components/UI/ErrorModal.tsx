@@ -30,9 +30,9 @@ const ErrorModal= (props:any) => {
     // useEffect(() => {
     //     const timer = setInterval(() => {
     //         setshowErrorModal(false);
-    //     }, 10);
+    //     }, 100);
     //     return clearInterval(timer);
-    // }, [setshowErrorModal]);
+    // }, [setshowErrorModal]);    
     return (
         <Expire
             delay={2000}

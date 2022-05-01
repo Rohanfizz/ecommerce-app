@@ -12,11 +12,41 @@ import {
     Text,
     useColorModeValue,
     Heading,
+    Select,
+    InputLeftAddon,
+    InputGroup,
 } from "@chakra-ui/react";
-
+import validator from "validator";
 import React from "react";
+import useForm from "../../hooks/useForm";
 
-const AddressFormMain = () => {
+const AddressFormMain = ({
+    firstNameValue,
+    firstNameOnChange,
+    firstNameOnFocus,
+    wrongFirstName,
+    lastNameValue,
+    lastNameOnChange,
+    lastNameOnFocus,
+    wrongLastName,
+    emailValue,
+    emailOnChange,
+    emailOnFocus,
+    wrongEmail,
+    zipcodeValue,
+    zipcodeOnChange,
+    zipcodeOnFocus,
+    wrongZipcode,
+    addressValue,
+    addressOnChange,
+    addressOnFocus,
+    wrongAddress,
+    phoneValue,
+    phoneOnChange,
+    phoneOnFocus,
+    wrongPhone,
+    cityValue,cityOnChange
+}) => {
     return (
         <Flex
             flexDir="column"
@@ -45,28 +75,34 @@ const AddressFormMain = () => {
                                 <FormControl
                                     id="firstName"
                                     isRequired
-                                    // isInvalid={wrongFirstName}
+                                    isInvalid={wrongFirstName}
                                 >
                                     <FormLabel>First Name</FormLabel>
                                     <Input
                                         type="text"
-                                        // value={firstNameValue}
-                                        // onChange={firstNameOnChange}
-                                        // onFocus={firstNameOnFocus}
+                                        value={firstNameValue}
+                                        onChange={firstNameOnChange}
+                                        onFocus={firstNameOnFocus}
+                                        _invalid={{
+                                            bg: "rgba(226, 60, 38, 0.38)",
+                                        }}
                                     />
                                 </FormControl>
                             </Box>
                             <Box>
                                 <FormControl
                                     id="lastName"
-                                    // isInvalid={wrongLastName}
+                                    isInvalid={wrongLastName}
                                 >
                                     <FormLabel>Last Name</FormLabel>
                                     <Input
                                         type="text"
-                                        // value={lastNameValue}
-                                        // onChange={lastNameOnChange}
-                                        // onFocus={lastNameOnFocus}
+                                        value={lastNameValue}
+                                        onChange={lastNameOnChange}
+                                        onFocus={lastNameOnFocus}
+                                        _invalid={{
+                                            bg: "rgba(226, 60, 38, 0.38)",
+                                        }}
                                     />
                                 </FormControl>
                             </Box>
@@ -74,14 +110,15 @@ const AddressFormMain = () => {
                         <FormControl
                             id="street-address"
                             isRequired
-                            // isInvalid={wrongEmail}
+                            isInvalid={wrongAddress}
                         >
                             <FormLabel>Street Address</FormLabel>
                             <Input
                                 type="text"
-                                // value={emailValue}
-                                // onChange={emailOnChange}
-                                // onFocus={emailOnFocus}
+                                value={addressValue}
+                                onChange={addressOnChange}
+                                onFocus={addressOnFocus}
+                                _invalid={{ bg: "rgba(226, 60, 38, 0.38)" }}
                             />
                             <FormErrorMessage>
                                 Enter a valid Street Address
@@ -92,15 +129,17 @@ const AddressFormMain = () => {
                                 <FormControl
                                     id="zipCode"
                                     isRequired
-                                    // isInvalid={wrongFirstName}
+                                    isInvalid={wrongZipcode}
                                 >
                                     <FormLabel>Zip Code</FormLabel>
                                     <Input
                                         type="number"
-                                        // w="60%"
-                                        // value={firstNameValue}
-                                        // onChange={firstNameOnChange}
-                                        // onFocus={firstNameOnFocus}
+                                        value={zipcodeValue}
+                                        onChange={zipcodeOnChange}
+                                        onFocus={zipcodeOnFocus}
+                                        _invalid={{
+                                            bg: "rgba(226, 60, 38, 0.38)",
+                                        }}
                                     />
                                 </FormControl>
                             </Box>
@@ -111,33 +150,60 @@ const AddressFormMain = () => {
                                     // isInvalid={wrongFirstName}
                                 >
                                     <FormLabel>City</FormLabel>
-                                    <Input
-                                        type="text"
-                                        w="100%"
-                                        // value={firstNameValue}
-                                        // onChange={firstNameOnChange}
-                                        // onFocus={firstNameOnFocus}
-                                    />
+                                    <Select placeholder="Select option" value={cityValue} onChange={cityOnChange}>
+                                        <option value="Delhi">Delhi</option>
+                                    </Select>
                                 </FormControl>
                             </Box>
                         </HStack>
-
-                        <FormControl
-                            id="email"
-                            isRequired
-                            // isInvalid={wrongEmail}
-                        >
-                            <FormLabel>Email address</FormLabel>
-                            <Input
-                                type="email"
-                                // value={emailValue}
-                                // onChange={emailOnChange}
-                                // onFocus={emailOnFocus}
-                            />
-                            <FormErrorMessage>
-                                Enter a valid Email Id
-                            </FormErrorMessage>
-                        </FormControl>
+                        <HStack>
+                            <Box w="50%">
+                                <FormControl
+                                    id="email"
+                                    isRequired
+                                    isInvalid={wrongEmail}
+                                >
+                                    <FormLabel>Email address</FormLabel>
+                                    <Input
+                                        type="email"
+                                        value={emailValue}
+                                        onChange={emailOnChange}
+                                        onFocus={emailOnFocus}
+                                        _invalid={{
+                                            bg: "rgba(226, 60, 38, 0.38)",
+                                        }}
+                                    />
+                                    <FormErrorMessage>
+                                        Enter a valid Email Id
+                                    </FormErrorMessage>
+                                </FormControl>
+                            </Box>
+                            <Box w="50%">
+                                <FormControl
+                                    id="email"
+                                    isRequired
+                                    isInvalid={wrongPhone}
+                                >
+                                    <FormLabel>Phone</FormLabel>
+                                    <InputGroup>
+                                        <InputLeftAddon children="+91" />
+                                        <Input
+                                            type="tel"
+                                            placeholder="Phone Number"
+                                            value={phoneValue}
+                                            onChange={phoneOnChange}
+                                            onFocus={phoneOnFocus}
+                                            _invalid={{
+                                                bg: "rgba(226, 60, 38, 0.38)",
+                                            }}
+                                        />
+                                    </InputGroup>
+                                    <FormErrorMessage>
+                                        Enter a valid Phone Number
+                                    </FormErrorMessage>
+                                </FormControl>
+                            </Box>
+                        </HStack>
                     </Stack>
                 </Box>
             </Stack>

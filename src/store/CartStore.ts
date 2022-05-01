@@ -38,3 +38,23 @@ export const updatingCartAtom = atom({
     key: "updatingCartAtom",
     default: false,
 });
+
+
+export const finalSubtotalSelector = selector({
+    key: "finalSubtotalSelector",
+    get: ({ get }) => {
+        const cart = get(cartAtom);
+        // console.log(cart);
+        let cartSubtotal = cart.subtotal;
+        let deliveryCharge = 0;
+        let taxes:number = 0;
+        if (cart.subtotal <= 300 && cart.subtotal>0) deliveryCharge = 100;
+        cart.products.forEach((product) => {
+            taxes += 1*(product?.product?.tax);
+        });
+        // console.log(cart,taxes);
+        taxes = Math.round(taxes);
+        // console.log(taxes);
+        return { cartSubtotal, deliveryCharge, taxes };
+    },
+});

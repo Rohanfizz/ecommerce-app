@@ -7,7 +7,7 @@ const Expire = (props:any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       props.setterFunction(false);
-      console.log(props.visibleProperty);
+      // console.log(props.visibleProperty);
     }, props.delay);
     return () => clearTimeout(timer)
   }, [props.delay]);

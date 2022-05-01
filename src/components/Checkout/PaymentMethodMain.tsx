@@ -12,7 +12,7 @@ import {
 import React from "react";
 import RadioCard from "../UI/RadioCart";
 
-const PaymentMethodMain = () => {
+const PaymentMethodMain = ({ paymentMethodValue, paymentMethodOnChange }) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "paymentMethodSelect",
         defaultValue: "Cash On Delivery",
@@ -60,6 +60,7 @@ const PaymentMethodMain = () => {
                             display="flex"
                             justifyContent={"center"}
                         >
+                            <RadioGroup value={paymentMethodValue} onChange={paymentMethodOnChange}>
                             {options.map((value) => {
                                 const radio = getRadioProps({ value });
                                 return (
@@ -68,6 +69,7 @@ const PaymentMethodMain = () => {
                                     </RadioCard>
                                 );
                             })}
+                            </RadioGroup>
                         </VStack>
                     </Stack>
                 </Box>

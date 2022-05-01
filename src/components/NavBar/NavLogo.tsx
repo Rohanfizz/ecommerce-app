@@ -1,9 +1,14 @@
 import { Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 
 function NavLogo() {
+    const router = useRouter();
+    const onClickHandler = ()=>{
+        router.push('/');
+    }
     return (
-        <Box  h="90%" w="10%">
+        <Box  h="90%" w="10%" onClick={onClickHandler} cursor="pointer">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 600 250">
                 <path
                     xmlns="http://www.w3.org/2000/svg"

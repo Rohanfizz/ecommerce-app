@@ -21,10 +21,14 @@ export const showSuccessModalAtom = atom({
 });
 
 export const errorTextAtom = atom({
-    key:"errorText",
+    key: "errorText",
     default: "",
-})
+});
 export const successTextAtom = atom({
-    key:"successText",
+    key: "successText",
     default: "",
-})
+});
+export const placeOrderAtom = atom({
+    key: "placeOrderAtom",
+    default: false,
+});

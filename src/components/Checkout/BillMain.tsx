@@ -1,11 +1,24 @@
 import { Flex, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
+import { useRecoilValue } from "recoil";
 import useCart from "../../hooks/query/useCart";
+import { finalSubtotalSelector } from "../../store/CartStore";
 import ItemsViewer from "../Cart/ItemsViewer";
 import Finalbill from "./Finalbill";
+import OrderBtn from "./OrderBtn";
 
-const BillMain = () => {
+const BillMain = ({
+    firstNameValue,
+    lastNameValue,
+    emailValue,
+    zipcodeValue,
+    addressValue,
+    phoneValue,
+    cityValue,
+    paymentMethodValue,
+}) => {
     const { editCartHandler, deleteFromCartHandler, cart } = useCart();
+    const finalSubtotal = useRecoilValue(finalSubtotalSelector);
     return (
         <Flex
             flexDir="column"
@@ -18,13 +31,41 @@ const BillMain = () => {
             rounded="md"
             bg="white"
             gap={4}
-            
-        >   
-        <Heading fontFamily='verdana' fontSize='1.5rem'>Order Details</Heading>
-            <Stack  h="30rem" w="100%" >
-                <ItemsViewer cart={cart} editItem={editCartHandler} deleteItem={deleteFromCartHandler}/>
+        >
+            <Heading fontFamily="verdana" fontSize="1.5rem">
+                Order Details
+            </Heading>
+            <Stack h="29rem" w="100%">
+                <ItemsViewer
+                    cart={cart}
+                    editItem={editCartHandler}
+                    deleteItem={deleteFromCartHandler}
+                />
             </Stack>
-            <Finalbill/>
+            <Finalbill
+                cartSubtotal={finalSubtotal.cartSubtotal}
+                deliveryCharge={finalSubtotal.deliveryCharge}
+                taxes={finalSubtotal.taxes}
+            />
+            <OrderBtn
+                disabled={cart.subtotal === 0}
+                firstNameValue={firstNameValue}
+                lastNameValue={lastNameValue}
+                emailValue={emailValue}
+                zipcodeValue={zipcodeValue}
+                cityValue={cityValue}
+                addressValue={addressValue}
+                phoneValue={phoneValue}
+                cart={cart}
+                deliveryCharge={finalSubtotal.deliveryCharge}
+                tax={finalSubtotal.taxes}
+                paymentMethodValue={paymentMethodValue}
+                totalPrice={
+                    finalSubtotal.cartSubtotal +
+                    finalSubtotal.deliveryCharge +
+                    finalSubtotal.taxes
+                }
+            />
         </Flex>
     );
 };

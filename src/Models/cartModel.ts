@@ -1,5 +1,6 @@
 export class SingleCartProduct {
     price: number = 0;
+    tax: number = 0;
     name: string = "";
     _id: string = "dummy";
     uuid: string ="dummy";
