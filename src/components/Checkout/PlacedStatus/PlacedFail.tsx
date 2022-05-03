@@ -24,9 +24,7 @@ export default function PlacedFail() {
         Order Placement Failed
       </Heading>
       <Text color={'gray.500'}>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua.
+        Some items are not available in the required stock, remove them from your cart or decrease the quantity to match the available stock.
       </Text>
     </Box>
   );

@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
 import { useRecoilState } from "recoil";
+import { setRecoil } from "recoil-nexus";
 import useOrder from "../../hooks/query/useOrder";
-import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
-import ErrorModal from "../UI/ErrorModal";
+import { errorTextAtom, showErrorModalAtom, wholeScreenLoadingAtom } from "../../store/UtilStore";
 
 const btnCss = `
 
@@ -42,9 +42,9 @@ const OrderBtn = ({
     tax,
     totalPrice,
     cityValue,
-    paymentMethodValue,
+    paymentMethodValue, 
 }) => {
-    const { showErrorModal, seterrorText, setshowErrorModal,setplacedOrder } = useOrder(
+    const {  seterrorText, setshowErrorModal,setplacedOrder } = useOrder(
         firstNameValue,
         lastNameValue,
         emailValue,
@@ -60,18 +60,24 @@ const OrderBtn = ({
     );
 
     const orderHandler = () => {
-        if (disabled) {
+        if (disabled === 1) {
             seterrorText("Your Cart is Empty!");
             setshowErrorModal(true);
             return;
         }
+        if (disabled === 2) {
+            seterrorText("Please fill all fields correctly!");
+            setshowErrorModal(true);
+            return;
+        }
+        setRecoil(wholeScreenLoadingAtom,true);
         setplacedOrder(true);
     };
 
     return (
         <>
-            {showErrorModal && <ErrorModal />}
-            <Button css={btnCss} onClick={orderHandler}>
+            
+            <Button css={btnCss} onClick={orderHandler} >
                 Place Order
             </Button>
         </>

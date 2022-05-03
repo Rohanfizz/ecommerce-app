@@ -11,29 +11,33 @@ const CheckoutMain = () => {
     const {
         formValue: firstNameValue,
         valueOnChange: firstNameOnChange,
-        valueOnFocus: firstNameOnFocus,
+        valueOnBlur: firstNameOnBlur,
         isError: wrongFirstName,
+        isValid: validFirstName,
     } = useForm((s: string) => s.length > 0 && s.length <= 25);
 
     const {
         formValue: lastNameValue,
         valueOnChange: lastNameOnChange,
-        valueOnFocus: lastNameOnFocus,
+        valueOnBlur: lastNameOnBlur,
         isError: wrongLastName,
+        isValid: validLastName,
     } = useForm((s: string) => s.length > 0 && s.length <= 25);
 
     const {
         formValue: emailValue,
         valueOnChange: emailOnChange,
-        valueOnFocus: emailOnFocus,
+        valueOnBlur: emailOnBlur,
         isError: wrongEmail,
+        isValid: validEmail,
     } = useForm(validator.isEmail);
 
     const {
         formValue: zipcodeValue,
         valueOnChange: zipcodeOnChange,
-        valueOnFocus: zipcodeOnFocus,
+        valueOnBlur: zipcodeOnBlur,
         isError: wrongZipcode,
+        isValid: validZipcode,
     } = useForm((s: string) => {
         // let regex = /^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$/;
         // return regex.test(s);
@@ -43,16 +47,18 @@ const CheckoutMain = () => {
     const {
         formValue: addressValue,
         valueOnChange: addressOnChange,
-        valueOnFocus: addressOnFocus,
+        valueOnBlur: addressOnBlur,
         isError: wrongAddress,
+        isValid: validAddress,
     } = useForm((s: string) => {
         return s.length > 0;
     });
     const {
         formValue: phoneValue,
         valueOnChange: phoneOnChange,
-        valueOnFocus: phoneOnFocus,
+        valueOnBlur: phoneOnBlur,
         isError: wrongPhone,
+        isValid: validPhone,
     } = useForm((s: string) => {
         return s.length == 10;
     });
@@ -60,13 +66,15 @@ const CheckoutMain = () => {
     const {
         formValue: cityValue,
         valueOnChange: cityOnChange,
-        valueOnFocus: cityOnFocus,
-    } = useForm((s: string) => true);
+        valueOnBlur: cityOnBlur,
+        isError: wrongCity,
+        isValid: validCity,
+    } = useForm((s: string) => s === "Delhi");
 
     const {
         formValue: paymentMethodValue,
         valueOnChange: paymentMethodOnChange,
-        valueOnFocus: paymentMethodOnFocus,
+        valueOnBlur: paymentMethodOnBlur,
     } = useForm((s: string) => true);
 
     return (
@@ -78,7 +86,7 @@ const CheckoutMain = () => {
         <Flex justifyContent={"center"}>
             <Grid
                 minH="45rem"
-                w="60%"
+                w="70%"
                 templateRows="repeat(5, 1fr)"
                 templateColumns="repeat(5, 1fr)"
                 gap={4}
@@ -87,30 +95,32 @@ const CheckoutMain = () => {
                     <AddressFormMain
                         firstNameValue={firstNameValue}
                         firstNameOnChange={firstNameOnChange}
-                        firstNameOnFocus={firstNameOnFocus}
+                        firstNameOnBlur={firstNameOnBlur}
                         wrongFirstName={wrongFirstName}
                         lastNameValue={lastNameValue}
                         lastNameOnChange={lastNameOnChange}
-                        lastNameOnFocus={lastNameOnFocus}
+                        lastNameOnBlur={lastNameOnBlur}
                         wrongLastName={wrongLastName}
                         emailValue={emailValue}
                         emailOnChange={emailOnChange}
-                        emailOnFocus={emailOnFocus}
+                        emailOnBlur={emailOnBlur}
                         wrongEmail={wrongEmail}
                         zipcodeValue={zipcodeValue}
                         zipcodeOnChange={zipcodeOnChange}
-                        zipcodeOnFocus={zipcodeOnFocus}
+                        zipcodeOnBlur={zipcodeOnBlur}
                         wrongZipcode={wrongZipcode}
                         addressValue={addressValue}
                         addressOnChange={addressOnChange}
-                        addressOnFocus={addressOnFocus}
+                        addressOnBlur={addressOnBlur}
                         wrongAddress={wrongAddress}
                         phoneValue={phoneValue}
                         phoneOnChange={phoneOnChange}
-                        phoneOnFocus={phoneOnFocus}
+                        phoneOnBlur={phoneOnBlur}
                         wrongPhone={wrongPhone}
                         cityValue={cityValue}
                         cityOnChange={cityOnChange}
+                        cityOnBlur={cityOnBlur}
+                        wrongCity={wrongCity}
                     />
                 </GridItem>
                 <GridItem rowSpan={5} colSpan={2}>
@@ -123,6 +133,17 @@ const CheckoutMain = () => {
                         phoneValue={phoneValue}
                         cityValue={cityValue}
                         paymentMethodValue={paymentMethodValue}
+                        disabled={
+                            !(
+                                validFirstName &&
+                                validLastName &&
+                                validEmail &&
+                                validZipcode &&
+                                validAddress &&
+                                validPhone &&
+                                validCity
+                            )
+                        }
                     />
                 </GridItem>
                 <GridItem rowSpan={2} colSpan={3}>

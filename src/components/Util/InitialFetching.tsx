@@ -9,7 +9,7 @@ import { cartAtom } from "../../store/CartStore";
 
 const InitialFetching = ({children}) => {
     useInitialFetch();
-    console.log(` Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur ad esse amet repellat beatae eum, quae ullam incidunt ipsa dolorem.`);
+    // console.log(` Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur ad esse amet repellat beatae eum, quae ullam incidunt ipsa dolorem.`);
     
     // setRecoil(userTokenAtom, userToken);
     // setRecoil(cartAtom, cart);

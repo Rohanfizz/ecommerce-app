@@ -16,6 +16,7 @@ const BillMain = ({
     phoneValue,
     cityValue,
     paymentMethodValue,
+    disabled,
 }) => {
     const { editCartHandler, deleteFromCartHandler, cart } = useCart();
     const finalSubtotal = useRecoilValue(finalSubtotalSelector);
@@ -48,7 +49,7 @@ const BillMain = ({
                 taxes={finalSubtotal.taxes}
             />
             <OrderBtn
-                disabled={cart.subtotal === 0}
+                disabled={cart.subtotal === 0?1:disabled?2:0}
                 firstNameValue={firstNameValue}
                 lastNameValue={lastNameValue}
                 emailValue={emailValue}

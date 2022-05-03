@@ -2,6 +2,7 @@ import { Box, Heading, Icon, Text } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import { fetchOrderById } from '../../../api/order';
 
 export default function PlacedSuccess() {
   return (
@@ -12,10 +13,27 @@ export default function PlacedSuccess() {
         Order Successfully Placed
       </Heading>
       <Text color={'gray.500'}>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua.
+        Thanks for shopping with us! Please Track your order or download invoice from the links given below.
       </Text>
     </Box>
   );
 }
+
+// export async function getServerSideProps(context) {
+//   let flag = false;
+//   const { pid } = context.params;
+//   try {
+//       const response = await fetchOrderById(oid);
+//       return {
+//           props: {
+//               productInfo: response.data,
+//           },
+//       };
+//   } catch (err) {
+//       return {
+//           props: {
+//               productInfo: undefined,
+//           },
+//       };
+//   }
+// }

@@ -6,7 +6,7 @@ import {
     fetchingCartAtom,
     updatingCartAtom,
 } from "../../store/CartStore";
-import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
+import { errorTextAtom, showErrorModalAtom, wholeScreenLoadingAtom } from "../../store/UtilStore";
 import { userTokenAtom } from "../../store/authStore";
 import { useEffect } from "react";
 import localforage from "localforage";
@@ -19,6 +19,9 @@ const useInitialFetch = () => {
         useRecoilState(showErrorModalAtom);
     const [errorText, seterrorText] = useRecoilState(errorTextAtom);
     const [cartIsFetched, setcartIsFetched] = useRecoilState(fetchingCartAtom);
+
+    const [showLoading,setShowLoading] = useRecoilState(wholeScreenLoadingAtom);
+
     const {
         error: errorFetching,
         refetch: refetchCart,
@@ -37,8 +40,9 @@ const useInitialFetch = () => {
         },
     });
 
+    
     useEffect(() => {
-        const fetcher = async () => {
+        const fetcher = async () => {   
             const userToken: any  = await localforage.getItem("userToken") ;
             setUserToken(JSON.parse(userToken));
             if (userToken) {

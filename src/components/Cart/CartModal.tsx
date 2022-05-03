@@ -66,9 +66,10 @@ const CartModal: React.FC = () => {
                 }}
                 isCentered
                 scrollBehavior={"inside"}
+                
             >
                 <ModalOverlay />
-                <ModalContent h="45rem">
+                <ModalContent h="45rem" minW="40rem">
                     <ModalHeader borderBottom="1px solid skyblue">
                         Your Cart
                     </ModalHeader>

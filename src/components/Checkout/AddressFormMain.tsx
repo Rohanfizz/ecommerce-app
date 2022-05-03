@@ -23,29 +23,31 @@ import useForm from "../../hooks/useForm";
 const AddressFormMain = ({
     firstNameValue,
     firstNameOnChange,
-    firstNameOnFocus,
+    firstNameOnBlur,
     wrongFirstName,
     lastNameValue,
     lastNameOnChange,
-    lastNameOnFocus,
+    lastNameOnBlur,
     wrongLastName,
     emailValue,
     emailOnChange,
-    emailOnFocus,
+    emailOnBlur,
     wrongEmail,
     zipcodeValue,
     zipcodeOnChange,
-    zipcodeOnFocus,
+    zipcodeOnBlur,
     wrongZipcode,
     addressValue,
     addressOnChange,
-    addressOnFocus,
+    addressOnBlur,
     wrongAddress,
     phoneValue,
     phoneOnChange,
-    phoneOnFocus,
+    phoneOnBlur,
     wrongPhone,
-    cityValue,cityOnChange
+    cityValue,
+    cityOnChange,
+    wrongCity,cityOnBlur
 }) => {
     return (
         <Flex
@@ -82,7 +84,7 @@ const AddressFormMain = ({
                                         type="text"
                                         value={firstNameValue}
                                         onChange={firstNameOnChange}
-                                        onFocus={firstNameOnFocus}
+                                        onBlur={firstNameOnBlur}
                                         _invalid={{
                                             bg: "rgba(226, 60, 38, 0.38)",
                                         }}
@@ -99,7 +101,7 @@ const AddressFormMain = ({
                                         type="text"
                                         value={lastNameValue}
                                         onChange={lastNameOnChange}
-                                        onFocus={lastNameOnFocus}
+                                        onBlur={lastNameOnBlur}
                                         _invalid={{
                                             bg: "rgba(226, 60, 38, 0.38)",
                                         }}
@@ -117,7 +119,7 @@ const AddressFormMain = ({
                                 type="text"
                                 value={addressValue}
                                 onChange={addressOnChange}
-                                onFocus={addressOnFocus}
+                                onBlur={addressOnBlur}
                                 _invalid={{ bg: "rgba(226, 60, 38, 0.38)" }}
                             />
                             <FormErrorMessage>
@@ -136,7 +138,7 @@ const AddressFormMain = ({
                                         type="number"
                                         value={zipcodeValue}
                                         onChange={zipcodeOnChange}
-                                        onFocus={zipcodeOnFocus}
+                                        onBlur={zipcodeOnBlur}
                                         _invalid={{
                                             bg: "rgba(226, 60, 38, 0.38)",
                                         }}
@@ -147,10 +149,15 @@ const AddressFormMain = ({
                                 <FormControl
                                     id="city"
                                     isRequired
-                                    // isInvalid={wrongFirstName}
+                                    isInvalid={wrongCity}
+                                    onBlur={cityOnBlur}
                                 >
                                     <FormLabel>City</FormLabel>
-                                    <Select placeholder="Select option" value={cityValue} onChange={cityOnChange}>
+                                    <Select
+                                        placeholder="Select option"
+                                        value={cityValue}
+                                        onChange={cityOnChange}
+                                    >
                                         <option value="Delhi">Delhi</option>
                                     </Select>
                                 </FormControl>
@@ -168,7 +175,7 @@ const AddressFormMain = ({
                                         type="email"
                                         value={emailValue}
                                         onChange={emailOnChange}
-                                        onFocus={emailOnFocus}
+                                        onBlur={emailOnBlur}
                                         _invalid={{
                                             bg: "rgba(226, 60, 38, 0.38)",
                                         }}
@@ -192,7 +199,7 @@ const AddressFormMain = ({
                                             placeholder="Phone Number"
                                             value={phoneValue}
                                             onChange={phoneOnChange}
-                                            onFocus={phoneOnFocus}
+                                            onBlur={phoneOnBlur}
                                             _invalid={{
                                                 bg: "rgba(226, 60, 38, 0.38)",
                                             }}

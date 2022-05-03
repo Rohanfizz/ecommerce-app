@@ -35,7 +35,6 @@ import {
 import validator from "validator";
 import { signUpReq } from "../../api/auth";
 import { useQuery } from "react-query";
-import ErrorModal from "../UI/ErrorModal";
 import { showErrorModalAtom } from "../../store/UtilStore";
 import useSignup from "../../hooks/query/useSignup";
 
@@ -51,35 +50,35 @@ export default function SignupModal() {
     const {
         formValue: firstNameValue,
         valueOnChange: firstNameOnChange,
-        valueOnFocus: firstNameOnFocus,
+        valueOnBlur: firstNameOnBlur,
         isError: wrongFirstName,
     } = useForm((s: string) => s.length > 0 && s.length <= 25);
 
     const {
         formValue: lastNameValue,
         valueOnChange: lastNameOnChange,
-        valueOnFocus: lastNameOnFocus,
+        valueOnBlur: lastNameOnBlur,
         isError: wrongLastName,
     } = useForm((s: string) => s.length > 0 && s.length <= 25);
 
     const {
         formValue: emailValue,
         valueOnChange: emailOnChange,
-        valueOnFocus: emailOnFocus,
+        valueOnBlur: emailOnBlur,
         isError: wrongEmail,
     } = useForm(validator.isEmail);
 
     const {
         formValue: passwordValue,
         valueOnChange: passwordOnChange,
-        valueOnFocus: passwordOnFocus,
+        valueOnBlur: passwordOnBlur,
         isError: wrongPassword,
     } = useForm((s: string) => s.length >= 8);
 
     const {
         formValue: passwordRepeatValue,
         valueOnChange: passwordRepeatOnChange,
-        valueOnFocus: passwordRepeatOnFocus,
+        valueOnBlur: passwordRepeatOnBlur,
         isError: wrongPasswordRepeat,
     } = useForm((s: string) => s === passwordValue);
 
@@ -108,9 +107,6 @@ export default function SignupModal() {
             <Modal isOpen={showsignupModal} onClose={onCloseModal} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                    {showErrorModal && (
-                        <ErrorModal/>
-                    )}
                     <ModalHeader>
                         <Heading fontSize={"4xl"} fontFamily={"mono"}>
                             Signup🙋‍♂️
@@ -146,7 +142,7 @@ export default function SignupModal() {
                                                     type="text"
                                                     value={firstNameValue}
                                                     onChange={firstNameOnChange}
-                                                    onFocus={firstNameOnFocus}
+                                                    onBlur={firstNameOnBlur}
                                                 />
                                             </FormControl>
                                         </Box>
@@ -160,7 +156,7 @@ export default function SignupModal() {
                                                     type="text"
                                                     value={lastNameValue}
                                                     onChange={lastNameOnChange}
-                                                    onFocus={lastNameOnFocus}
+                                                    onBlur={lastNameOnBlur}
                                                 />
                                             </FormControl>
                                         </Box>
@@ -175,7 +171,7 @@ export default function SignupModal() {
                                             type="email"
                                             value={emailValue}
                                             onChange={emailOnChange}
-                                            onFocus={emailOnFocus}
+                                            onBlur={emailOnBlur}
                                         />
                                         <FormErrorMessage>
                                             Enter a valid Email Id
@@ -196,7 +192,7 @@ export default function SignupModal() {
                                                 }
                                                 value={passwordValue}
                                                 onChange={passwordOnChange}
-                                                onFocus={passwordOnFocus}
+                                                onBlur={passwordOnBlur}
                                             />
                                             <InputRightElement h={"full"}>
                                                 <Button
@@ -240,7 +236,7 @@ export default function SignupModal() {
                                                 onChange={
                                                     passwordRepeatOnChange
                                                 }
-                                                onFocus={passwordRepeatOnFocus}
+                                                onBlur={passwordRepeatOnBlur}
                                             />
                                             <InputRightElement h={"full"}>
                                                 <Button

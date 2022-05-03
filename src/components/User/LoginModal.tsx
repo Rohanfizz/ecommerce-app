@@ -28,7 +28,6 @@ import {
     showErrorModalAtom,
     showSuccessModalAtom,
 } from "../../store/UtilStore";
-import ErrorModal from "../UI/ErrorModal";
 import SuccessModal from "../UI/SuccessModal";
 
 export default function LoginModal() {
@@ -44,14 +43,14 @@ export default function LoginModal() {
     const {
         formValue: emailValue,
         valueOnChange: emailOnChange,
-        valueOnFocus: emailOnFocus,
+        valueOnBlur: emailOnBlur,
         isError: wrongEmail,
     } = useForm(validator.isEmail);
 
     const {
         formValue: passwordValue,
         valueOnChange: passwordOnChange,
-        valueOnFocus: passwordOnFocus,
+        valueOnBlur: passwordOnBlur,
         isError: wrongPassword,
     } = useForm((s: string) => s.length >= 8);
 
@@ -76,7 +75,6 @@ export default function LoginModal() {
         <Modal isOpen={showLoginModal} onClose={onCloseModal} isCentered>
             <ModalOverlay />
             <ModalContent>
-                {showErrorModal && <ErrorModal />}
                 {showSuccessModal && (
                     <SuccessModal>{correctString}</SuccessModal>
                 )}
@@ -106,7 +104,7 @@ export default function LoginModal() {
                                         type="email"
                                         value={emailValue}
                                         onChange={emailOnChange}
-                                        onFocus={emailOnFocus}
+                                        onBlur={emailOnBlur}
                                     />
                                     <FormErrorMessage>
                                         Enter a valid Email Id
@@ -122,7 +120,7 @@ export default function LoginModal() {
                                         type={"password"}
                                         value={passwordValue}
                                         onChange={passwordOnChange}
-                                        onFocus={passwordOnFocus}
+                                        onBlur={passwordOnBlur}
                                     />
                                 </FormControl>
                                 <Stack py={10}>

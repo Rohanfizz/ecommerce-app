@@ -9,6 +9,13 @@ export class ShipmentInfo {
     city: string = "";
     streetAddress: string = "";
 }
+
+export class OutOfStockItem{
+    id:string="";
+    name:string="";
+    stock:number=0;
+}
+
 export class Order {
     shipmentInfo: ShipmentInfo = new ShipmentInfo();
     orderStatus: string = "placed";
@@ -20,4 +27,9 @@ export class Order {
     delivery: number = 0;
     totalPrice: number = 0;
     invoice: string = "";
+}
+
+export class MyOrders {
+    inProgress: any[] = [];
+    completed: any[] = [];
 }

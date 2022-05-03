@@ -39,7 +39,6 @@ export const updatingCartAtom = atom({
     default: false,
 });
 
-
 export const finalSubtotalSelector = selector({
     key: "finalSubtotalSelector",
     get: ({ get }) => {
@@ -47,14 +46,27 @@ export const finalSubtotalSelector = selector({
         // console.log(cart);
         let cartSubtotal = cart.subtotal;
         let deliveryCharge = 0;
-        let taxes:number = 0;
-        if (cart.subtotal <= 300 && cart.subtotal>0) deliveryCharge = 100;
+        let taxes: number = 0;
+        if (cart.subtotal <= 300 && cart.subtotal > 0) deliveryCharge = 100;
         cart.products.forEach((product) => {
-            taxes += 1*(product?.product?.tax);
+            taxes += 1 * product?.product?.tax;
         });
         // console.log(cart,taxes);
         taxes = Math.round(taxes);
         // console.log(taxes);
         return { cartSubtotal, deliveryCharge, taxes };
     },
+});
+
+export const fetchMyOrdersAtom = atom({
+    key: 'fetchMyOrdersAtom',
+    default: false,
+});
+
+export const myOrdersAtom = atom<{
+    inProgress: any[];
+    completed: any[];
+}>({
+    key: "myOrdersAtom",
+    default: { inProgress: [] as any[], completed: [] as any[] },
 });

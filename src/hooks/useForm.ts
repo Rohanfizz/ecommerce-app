@@ -9,13 +9,13 @@ const useForm = (validatorFunction: (data: any) => boolean) => {
         setFormValue(e!.target!.value);
         setIsTouched(true);
     };
-    const valueOnFocus = (e: any) => {
-
-        // setIsTouched(true);
+    const valueOnBlur = (e: any) => {
+        setIsTouched(true);
     };
-    const isError = !(!isTouched || validatorFunction(formValue));
+    const isValid = validatorFunction(formValue);
+    const isError = !(!isTouched || isValid);
     // setWrongValue(!isCorrect);
 
-    return { formValue, wrongValue, valueOnChange, valueOnFocus ,isError};
+    return { formValue, wrongValue, valueOnChange, valueOnBlur ,isError,isValid};
 };
 export default useForm;

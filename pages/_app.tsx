@@ -10,6 +10,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import RecoilNexus from "recoil-nexus";
 import useInitialFetch from "../src/hooks/query/useInitialFetch";
 import InitialFetching from "../src/components/Util/InitialFetching";
+
+
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -20,6 +22,8 @@ export const queryClient = new QueryClient({
         },
     },
 });
+
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <RecoilRoot>

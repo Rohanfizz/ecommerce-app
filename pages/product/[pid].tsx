@@ -1,9 +1,6 @@
-import { Spinner } from "@chakra-ui/react";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { fetchProductById } from "../../src/api/products";
 import ProductMain from "../../src/components/Products/ProductPage/ProductMain";
-import useProduct from "../../src/hooks/query/useProduct";
+
 
 function ProductPage({productInfo}) {
     return (

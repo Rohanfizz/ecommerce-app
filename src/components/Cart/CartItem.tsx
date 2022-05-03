@@ -76,7 +76,12 @@ const CartItem: React.FC<{
             // border='1px'
             mb="0.5rem"
         >
-            <GridItem rowSpan={2} colSpan={2}>
+            <GridItem
+                rowSpan={2}
+                colSpan={2}
+                border="1px solid #e2e8f0"
+                borderRadius={"2%"}
+            >
                 <Image
                     alt={"product image"}
                     src={product?.productImage[0]}
@@ -143,7 +148,16 @@ const CartItem: React.FC<{
                     </NumberInput>
                 </Flex>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={2} textAlign="center">
+            <GridItem
+                rowSpan={1}
+                colSpan={2}
+                textAlign="center"
+                display="flex"
+                alignItems={"center"}
+                justifyContent="center"
+                border="1px solid #e2e8f0"
+                borderRadius={"2%"}
+            >
                 <Text fontSize="1rem">
                     {"Price: "}
                     <Text as="i" fontSize="2xl">
