@@ -1,5 +1,4 @@
 import { Box, Flex, Heading, Icon, Text } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
 import { AiFillCloseCircle, AiOutlineClose, AiOutlineCloseCircle } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 
