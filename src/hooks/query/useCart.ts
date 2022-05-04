@@ -61,10 +61,10 @@ const useCart = () => {
         let updatedItems;
 
         if (existCartItem) {
-            if (existCartItem.quantity === 20 && action === 1) {
-                setLimitErrorModal(true);
-                return;
-            }
+            // if (existCartItem.quantity === 20 && action === 1) {
+            //     setLimitErrorModal(true);
+            //     return;
+            // }
             const updatedItem = {
                 ...existCartItem,
                 quantity: existCartItem.quantity + action,

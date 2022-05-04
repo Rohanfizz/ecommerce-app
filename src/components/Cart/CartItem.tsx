@@ -131,7 +131,7 @@ const CartItem: React.FC<{
                         defaultValue={quantity}
                         w="90%"
                         min={1}
-                        max={20}
+                        max={100}
                         value={quantity}
                     >
                         <NumberInputField readOnly />
