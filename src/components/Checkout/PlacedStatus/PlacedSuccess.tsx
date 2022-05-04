@@ -1,8 +1,7 @@
 import { Box, Heading, Icon, Text } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
-import { AiOutlineCheck } from 'react-icons/ai';
+
 import { BsCheckCircleFill } from 'react-icons/bs';
-import { fetchOrderById } from '../../../api/order';
+
 
 export default function PlacedSuccess() {
   return (

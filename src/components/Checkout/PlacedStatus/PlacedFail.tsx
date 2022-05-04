@@ -1,6 +1,5 @@
 import { Box, Flex, Heading, Icon, Text } from '@chakra-ui/react';
-import { AiFillCloseCircle, AiOutlineClose, AiOutlineCloseCircle } from 'react-icons/ai';
-import { GrClose } from 'react-icons/gr';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default function PlacedFail() {
   return (
