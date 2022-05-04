@@ -43,7 +43,11 @@ const Layout = (props: any) => {
                 minH="calc( 100vh - 4.5rem - 6rem)"
                 w="90vw"
                 minW="90rem"
-                p="1rem"
+                // p="1rem"
+                // border={'1px'}
+                display='Flex'
+                alignItems={'center'}
+                justifyContent='center'
             >
                 {props.children}
             </Box>
