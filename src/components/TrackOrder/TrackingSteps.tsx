@@ -47,6 +47,10 @@ export const TrackingSteps = ({ order }) => {
         "Cancelled",
     ];
     const activeStep = steps.indexOf(order.orderStatus) + 1;
+    let cancelled = false;
+    if(order.orderStatus === 'Cancelled'){
+        cancelled = true;
+    }
     // console.log(order.orderStatus);
     return (
         <Box w="100%" paddingLeft={"10%"}>
@@ -96,12 +100,16 @@ export const TrackingSteps = ({ order }) => {
                         on your provided phone if we need any assistance :)
                     </Box>
                 </Step>
-                <Step width="100%" label={"Delivered"} icon={AiTwotoneHeart}>
+                {!cancelled?<Step width="100%" label={"Delivered"} icon={AiTwotoneHeart}>
                     <Box sx={orderStatusDescription}>
                         Your order has been delivered! Did not receive yet?
                         Contact us ASAP
                     </Box>
-                </Step>
+                </Step> : <Step width="100%" label={"Cancelled"} icon={AiTwotoneHeart}>
+                    <Box sx={orderStatusDescription}>
+                        Your Order Has been Successfully Cancelled!
+                    </Box>
+                </Step>}
                 {/* ))} */}
             </Steps>
             {/* {activeStep === steps.length ? (
