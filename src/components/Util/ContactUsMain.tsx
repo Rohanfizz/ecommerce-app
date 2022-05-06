@@ -30,6 +30,9 @@ import { BsGithub, BsPerson, BsMailbox } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import useForm from "../../hooks/useForm";
 import validator from "validator";
+import { setRecoil } from "recoil-nexus";
+import { errorTextAtom, showErrorModalAtom, successTextAtom } from "../../store/UtilStore";
+import { postMessage } from "../../api/message";
 
 export default function ContactUsMain() {
     const {
@@ -61,6 +64,28 @@ export default function ContactUsMain() {
         isError: wrongMessage,
         isValid: validMessage,
     } = useForm((s) => s.length > 0);
+
+    const submitHandler = async () => {
+        const reqBody = {
+            fullName: nameValue,
+            email: emailValue,
+            issue: issueValue,
+            message: messageValue,
+        };
+        
+        try {
+            const message = await postMessage(reqBody);
+            setRecoil(successTextAtom, "We've Got your message!");
+            setRecoil(showErrorModalAtom,false);
+            console.log(message);
+        } catch {
+            setRecoil(
+                errorTextAtom,
+                "There was a problem sending your message..."
+            );
+            setRecoil(showErrorModalAtom,true);
+        }
+    };
 
     return (
         <Container
@@ -277,6 +302,7 @@ export default function ContactUsMain() {
                                                     bg="#0D74FF"
                                                     color="white"
                                                     _hover={{}}
+                                                    onClick={submitHandler}
                                                 >
                                                     Send Message
                                                 </Button>

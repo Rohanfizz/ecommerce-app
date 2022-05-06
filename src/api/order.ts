@@ -54,7 +54,7 @@ export const fetchOrderById = async (oid: string) => {
     const orderData = await axios.get(
         `${process.env.BACKEND_URL}api/v1/orders/${oid}`
     );
-    console.log(orderData);
+    // console.log(orderData);
     return orderData;
 };
 

@@ -48,6 +48,9 @@ export const TrackingSteps = ({ order }) => {
     ];
     let activeStep = steps.indexOf(order.orderStatus) + 1;
     let cancelled = false;
+    if(order.orderStatus === 'Delivered'){
+        activeStep = 5;
+    }
     if(order.orderStatus === 'Cancelled'){
         activeStep=5;
         cancelled = true;

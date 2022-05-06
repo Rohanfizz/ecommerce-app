@@ -15,7 +15,6 @@ const ProductMain: React.FC<{ product: any }> = ({ product }) => {
             templateRows="repeat(11, 1fr)"
             templateColumns="repeat(9, 1fr)"
             gap={2}
-            border='1px'
         >
             <GridItem rowSpan={8} colSpan={4} h="40rem">
                 <ImageViewer images={product.productImage} />

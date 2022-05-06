@@ -70,6 +70,7 @@ export default function Component({ data, heading }) {
             alignItems="center"
             justifyContent="center"
             borderRadius={"0.5rem"}
+            
         >
             <Table
                 w="full"

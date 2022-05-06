@@ -32,7 +32,7 @@ const MyOrdersMain = () => {
         if (typeof window != undefined) setfetchMyOrders(true);
     }, [userToken]);
     return (
-        <Flex justifyContent={"center"} w="100%">
+        <Flex justifyContent={"center"} w="100%" m={3}>
             <Stack w="80%">
                 <Box bg="blue.100" p="2" borderRadius={'0.4rem'}>
                 <Heading as={"h1"} paddingLeft="1rem" fontFamily={'verdana'}>
