@@ -1,7 +1,17 @@
-import { Box, Flex, Select } from "@chakra-ui/react";
+import { Flex, Select } from "@chakra-ui/react";
 import React from "react";
+import { setRecoil } from "recoil-nexus";
+import { fetchingProductsAtom, sortByAtom } from "../../store/productStore";
 
 function SortBox() {
+    
+    const sorter = (e: any) => {
+        const val = e.target.value;
+        setRecoil(sortByAtom,val);
+        setRecoil(fetchingProductsAtom,true);
+    };
+
+
     return (
         <Flex
             w="100%"
@@ -13,15 +23,20 @@ function SortBox() {
             justifyContent="flex-end"
             // borderRadius={"0.5rem"} boxShadow='2xl' p='6' rounded='md' bg='white'
         >
-            
             {/* <Flex alignItems={"center"} justifyContent="flex-end"> */}
-                Sort By:
-                <Select placeholder="Featured" variant="flushed" w="auto">
-                    <option value="option1">Price: low to high</option>
-                    <option value="option2">Price: High to Low</option>
-                    <option value="option3">Avg. Customer Reviews</option>
-                    <option value="option3">New Arrivals</option>
-                </Select>
+            Sort By:
+            <Select
+                // placeholder="New Arrivals"
+                defaultValue={'createdAt'}
+                variant="flushed"
+                w="auto"
+                onChange={sorter}
+            >
+                <option value="createdAt">New Arrivals</option>
+                <option value="price">Price: low to high</option>
+                <option value="-price">Price: High to Low</option>
+                <option value="ratingNumber">Avg. Customer Reviews</option>
+            </Select>
             {/* </Flex> */}
         </Flex>
     );

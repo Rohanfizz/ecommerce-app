@@ -22,15 +22,12 @@ const useInitialFetch = () => {
 
     const [showLoading,setShowLoading] = useRecoilState(wholeScreenLoadingAtom);
 
-    const {
-        error: errorFetching,
-        refetch: refetchCart,
-        isSuccess: isSuccessFetching,
-    } = useQuery("cart-fetch", fetchCart, {
+    useQuery("cart-fetch", fetchCart, {
         enabled: fetchingCart,
         retry: 0,
         onSettled: (data) => {
-            setCart(data?.data?.data?.cart);
+            if(data?.data?.data?.cart)setCart(data?.data?.data?.cart);
+            else setCart(new Cart());
             setfetchingCart(false);
         },
         onError: (error) => {

@@ -22,6 +22,7 @@ export const fetchInitialCart = async () => {
         });
         // console.log(cart?.data?.data?.cart);
         setRecoil(cartAtom, cart?.data?.data?.cart);
+        return;
     } catch (err) {
         setRecoil(cartAtom, new Cart());
     }

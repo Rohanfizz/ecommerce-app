@@ -12,8 +12,8 @@ export class CartProduct {
 }
 class Cart {
     // products : [{ product: any }, { quantity: number }];
-    products: CartProduct[];
-    subtotal: number;
+    products: CartProduct[] = [];
+    subtotal: number = 0;
     constructor() {
         this.products = [];
         this.subtotal = 0;

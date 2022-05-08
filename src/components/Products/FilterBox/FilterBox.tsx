@@ -8,36 +8,49 @@ import {
     Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { setRecoil } from "recoil-nexus";
+import useFilterBox from "../../../hooks/useFilterBox";
+import {
+    fetchingProductsAtom,
+    priceGTEAtom,
+    priceLTEAtom,
+} from "../../../store/productStore";
 import CategorySelector from "./CategorySelector";
 import ColorSelector from "./ColorSelector";
 
 const followerCss = {
     // position: '-webkit-sticky',
-    position: 'sticky',
+    position: "sticky",
     top: 20,
     // backgroundColor: 'green',
     // border: '2px solid #4CAF50'
-}
+};
 
+const categories = [
+    "Lipstick",
+    "Foundation",
+    "Perfume",
+    "Cream",
+    "Highlighter",
+    "Spray",
+    "Eyeliner",
+];
+
+const colors = [
+    "red",
+    "blue",
+    "green",
+    "orange",
+    "white",
+    "black",
+    "purple",
+    "brown",
+];
 function FilterBox() {
-    const categories = [
-        "Seasonal",
-        "Lipsticks",
-        "Foundation",
-        "Product x",
-        "Product y",
-    ];
+    const { priceGTE, priceLTE, priceGTEOnChange, priceLTEOnChange } =
+        useFilterBox();
 
-    const colors = [
-        "red",
-        "blue",
-        "green",
-        "orange",
-        "white",
-        "black",
-        "purple",
-        "brown",
-    ];
     return (
         <Box
             // h="100%"
@@ -57,10 +70,22 @@ function FilterBox() {
                 Price
             </Text>
             <Flex>
-                <Input placeholder="Min" type="number" min={0}></Input>
-                <Input placeholder="Max" type="number" min={0}></Input>
+                <Input
+                    placeholder="Min"
+                    type="number"
+                    min={0}
+                    value={priceGTE}
+                    onChange={priceGTEOnChange}
+                />
+                <Input
+                    placeholder="Max"
+                    type="number"
+                    min={0}
+                    value={priceLTE}
+                    onChange={priceLTEOnChange}
+                />
             </Flex>
-            <ColorSelector colors={colors} />
+            {/* <ColorSelector colors={colors} /> */}
             <Flex
                 w="100%"
                 justifyContent="flex-end"
@@ -70,7 +95,12 @@ function FilterBox() {
                 gap="0.5rem"
             >
                 <Button position={"relative"}>Cancel</Button>
-                <Button position={"relative"}>Go</Button>
+                <Button
+                    position={"relative"}
+                    onClick={() => setRecoil(fetchingProductsAtom, true)}
+                >
+                    Apply Filters
+                </Button>
             </Flex>
         </Box>
     );
