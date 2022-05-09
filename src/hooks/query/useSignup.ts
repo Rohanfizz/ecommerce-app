@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { signUpReq } from "../../api/auth";
 import { createNewCart } from "../../api/cart";
-import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
+import { userTokenAtom, isPrivilagedAtom } from "../../store/authStore";
 import { cartAtom, subTotalCartAtom } from "../../store/CartStore";
 import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
 
@@ -21,7 +21,7 @@ const useSignup = (
     const [showErrorModal, setshowErrorModal] =
         useRecoilState(showErrorModalAtom);
     const [token, setToken] = useRecoilState(userTokenAtom);
-    const [userUUID, setuserUUID] = useRecoilState(userUUIDAtom);
+    const [isPrivilaged, setisPrivilaged] = useRecoilState(isPrivilagedAtom);
     const cart = useRecoilValue(cartAtom);
     const [errorText, setErrorText] = useRecoilState(errorTextAtom);
     const subtotal = useRecoilValue(subTotalCartAtom);
@@ -53,7 +53,7 @@ const useSignup = (
             },
             onSettled: (data) => {
                 setToken(data?.data?.token);
-                setuserUUID(data?.data?.data?.uuid);
+                setisPrivilaged((data?.data?.data?.role)!='user');
                 refetchCart();
             },
         }

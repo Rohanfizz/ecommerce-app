@@ -1,4 +1,5 @@
 import axios from "axios";
+import { MdStayCurrentLandscape } from "react-icons/md";
 import { getRecoil } from "recoil-nexus";
 import { ShipmentInfo } from "../Models/OrderModel";
 import { userTokenAtom } from "../store/authStore";
@@ -92,4 +93,58 @@ export const fetchUserOrders = async () => {
         });
     console.log(orderData);
     return orderData;
+};
+
+export const fetchAdminOrders = (filter: string) => {
+    console.log(
+        filter,
+        `${process.env.BACKEND_URL}api/v1/orders/all?${
+            filter === "All" ? "" : "orderStatus=" + filter + "&"
+        }sort=createdAt`
+    );
+    return axios
+        .get(
+            `${process.env.BACKEND_URL}api/v1/orders/all?${
+                filter === "All" ? "" : "orderStatus=" + filter + "&"
+            }sort=createdAt`,
+            {
+                headers: {
+                    Authorization: "Bearer " + getRecoil(userTokenAtom),
+                },
+            }
+        )
+        .then((res) => {
+            return res;
+        });
+};
+
+export const moveStage =async (factor: number, currStage: string, id: string) => {
+    const stages = [
+        "Placed",
+        "Approved",
+        "Processing",
+        "Dispatched",
+        "Out For Delivery",
+        "Delivered",
+        "Cancelled",
+    ];
+    
+    const currStageIdx = stages.indexOf(currStage);
+    console.log(currStageIdx,factor);
+    console.log(stages[currStageIdx + factor]);
+    await axios
+        .patch(`${process.env.BACKEND_URL}api/v1/orders/move/${id}`,{
+            orderStatus: stages[currStageIdx + factor],
+        }, {
+            headers: {
+                Authorization: "Bearer " + getRecoil(userTokenAtom),
+            },
+            
+        })
+        .then((res) => {
+            console.log(res);
+            return res;
+        }).catch((err)=>{
+            console.log(err.response);
+        });
 };

@@ -31,7 +31,7 @@ const NavbarCartLogo = () => {
 
     return (
         <Flex
-            borderRadius={"1rem"}
+            borderRadius={"0.2rem"}
             w="7rem"
             bg="primaryDark"
             h="70%"
@@ -48,7 +48,7 @@ const NavbarCartLogo = () => {
                 alignItems={"center"}
                 justifyContent="center"
                 bg="primary"
-                borderRadius={"20%"}
+                borderRadius={"10%"}
                 h="2rem"
                 w="2rem"
                 textAlign={"center"}

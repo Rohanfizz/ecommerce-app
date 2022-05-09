@@ -7,6 +7,7 @@ import NavbarCartLogo from "./NavbarCartLogo";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
     isLoggedInSelector,
+    isPrivilagedAtom,
     showLoginModalAtom,
     showSignupModalAtom,
     showUserActionDropboxAtom,
@@ -15,6 +16,8 @@ import LoginModal from "../User/LoginModal";
 import SignupModal from "../User/SignupModal";
 import UserMenu from "../User/UserMenu";
 import { on } from "events";
+import { getRecoil } from "recoil-nexus";
+import ManageOrdersButton from "./ManageOrdersButton";
 
 const hoverCss = {
     cursor: "pointer",
@@ -23,6 +26,7 @@ const hoverCss = {
 
 function NavUtilLogos() {
     const isLoggedIn = useRecoilValue(isLoggedInSelector);
+    const isPrivilaged = useRecoilValue(isPrivilagedAtom);
     const [showLoginModal, setshowLoginModal] =
         useRecoilState(showLoginModalAtom);
     const [showUserActionDropbox, setshowUserActionDropbox] = useRecoilState(
@@ -43,14 +47,16 @@ function NavUtilLogos() {
         <Flex
             // border="1px solid blue"
             h="90%"
-            w="10%"
+            w="15%"
             fontSize={"2rem"}
             color="white"
             justifyContent={"space-around"}
             // flexDir={"column"}
             alignItems="center"
+            gap={3}
             // paddingRight="3rem"
         >
+            {isPrivilaged && <ManageOrdersButton />}
             <NavbarCartLogo />
             {!isLoggedIn && (
                 // <Box border="1px">

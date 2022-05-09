@@ -6,22 +6,28 @@ import {
     Grid,
     GridItem,
     Icon,
+    IconButton,
     Image,
     Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { BiRupee } from "react-icons/bi";
+import { BiEdit, BiRupee } from "react-icons/bi";
 import { BsCartPlusFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
+import { useRecoilValue } from "recoil";
+import { getRecoil } from "recoil-nexus";
+import { isPromise } from "util/types";
 import useCart from "../../../hooks/query/useCart";
+import { isPrivilagedAtom } from "../../../store/authStore";
 import AddToCartButton from "../../Cart/AddToCartButton";
 
 const ProductCard: React.FC<{ product: any }> = ({ product }) => {
-
     const router = useRouter();
-
+    const isPrivilaged = useRecoilValue(isPrivilagedAtom);
+    console.log(isPrivilaged);
     const ratingStars: any[] = [];
     for (let i = 1; i <= 5; i++) {
         if (product.ratingNumber >= i)
@@ -46,6 +52,21 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
             bg="white"
             _hover={{ cursor: "pointer" }}
         >
+            {isPrivilaged && (
+                <IconButton
+                    aria-label="Edit product"
+                    icon={<BiEdit />}
+                    color="white"
+                    fontSize="2rem"
+                    pos="absolute"
+                    bg="cyan.600"
+                    h="3rem"
+                    w="3rem"
+                    _hover={{
+                        bg: "cyan.900",
+                    }}
+                />
+            )}
             <Box w="100%" h="55%">
                 <Image
                     alt={product.name}
@@ -55,15 +76,18 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
                     h="100%"
                 />
             </Box>
-            <Text
-                fontSize="1.1rem"
-                fontFamily="verdana"
-                paddingTop="1rem"
-                as="em"
-                noOfLines={2}
-            >
-                {product.name}
-            </Text>
+
+            <Box minH="5rem">
+                <Text
+                    fontSize="1.1rem"
+                    fontFamily="verdana"
+                    paddingTop="1rem"
+                    as="em"
+                    noOfLines={2}
+                >
+                    {product.name}
+                </Text>
+            </Box>
             <Grid
                 templateRows="repeat(2, 1fr)"
                 templateColumns="repeat(5, 1fr)"

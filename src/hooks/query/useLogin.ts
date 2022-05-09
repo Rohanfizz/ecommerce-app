@@ -2,8 +2,9 @@ import axios from "axios";
 import localforage from "localforage";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
+import { setRecoil } from "recoil-nexus";
 import { loginReq } from "../../api/auth";
-import { userTokenAtom, userUUIDAtom } from "../../store/authStore";
+import { isPrivilagedAtom, userTokenAtom } from "../../store/authStore";
 import { fetchingCartAtom } from "../../store/CartStore";
 import {
     errorTextAtom,
@@ -24,7 +25,7 @@ const useLogin = (email: string, password: string) => {
     const [showSuccessModal, setshowSuccessModal] =
         useRecoilState(showSuccessModalAtom);
     const [token, setToken] = useRecoilState(userTokenAtom);
-    const [userUUID, setuserUUID] = useRecoilState(userUUIDAtom);
+    const [isPrivilaged, setisPrivilaged] = useRecoilState(isPrivilagedAtom);
     const [errorText, setErrorText] = useRecoilState(errorTextAtom);
 
     const { error, refetch, isSuccess }: Query = useQuery(
@@ -44,7 +45,8 @@ const useLogin = (email: string, password: string) => {
             onSettled: async (data) => {
                 setToken(data?.data?.token);
                 await localforage.setItem("userToken", data?.data?.token);
-                setuserUUID(data?.data?.data?.uuid);
+                
+                setisPrivilaged((data?.data?.data?.user?.role) != "user");
                 setfetchingCart(true);
             },
         }

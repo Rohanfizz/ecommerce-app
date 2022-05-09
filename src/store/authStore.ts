@@ -32,19 +32,22 @@ export const userTokenAtom = atom({
     effects: [localforageEffect("userToken")],
 });
 
-export const userUUIDAtom = atom({
-    key: "userUUID",
-    default: null,
+export const isPrivilagedAtom = atom<Boolean>({
+    key: "isPrivilagedAtom",
+    default: false,
 });
 
 export const isLoggedInSelector = selector({
     key: "isLoggedInSelector",
     get: ({ get }) => {
         const userToken = get(userTokenAtom);
-        return (userToken!=null && userToken != "");
+        return userToken != null && userToken != "";
     },
-    
 });
+// export const isPrivilagedAtom = atom({
+//     key: "isPrivilagedAtom",
+//     default: false,
+// });
 
 export const showUserActionDropboxAtom = atom({
     key: "showUserActionDropbox",

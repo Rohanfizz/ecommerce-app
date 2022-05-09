@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const validateUser =async (token:string)=>{
+    try{
+        const data = await axios.get(`${process.env.BACKEND_URL}api/v1/users/validate`,{
+            headers: { Authorization: "Bearer " + token },
+        });
+        return data?.data;
+
+    }catch(err){
+        return null;
+    }
+}
+
 export const signUpReq = (
     firstName: string,
     lastName: string,
