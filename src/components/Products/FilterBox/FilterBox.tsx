@@ -27,7 +27,7 @@ const followerCss = {
     // border: '2px solid #4CAF50'
 };
 
-const categories = [
+export const categories = [
     "Lipstick",
     "Foundation",
     "Perfume",

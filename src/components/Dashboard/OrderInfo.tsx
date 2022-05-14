@@ -14,29 +14,21 @@ import { useFetchOrderData } from "../../hooks/query/useFetchOrderData";
 import OrderTable from "./OrderTable";
 
 const OrderInfo = () => {
-    const {
-        data,
-        filter,
-        setFilter,
-        refetchOrders,
-        isLoading,
-        setfetchingOrder,
-    } = useFetchOrderData();
+    const { data, setFilter, refetchOrders, isLoading, setfetchingOrder } =
+        useFetchOrderData();
 
     const refreshButton = () => {
         refetchOrders();
     };
 
-    const moveStageHandler =async (factor,orderStatus,id)=>{
-        await moveStage(factor,orderStatus,id);
+    const moveStageHandler = async (factor, orderStatus, id) => {
+        await moveStage(factor, orderStatus, id);
         setfetchingOrder(true);
-    }
-
-    
+    };
 
     return (
         <Stack h="100%" w="100%">
-            <Flex justifyContent={"flex-end"} gap="2rem">
+            <Flex justifyContent={"flex-end"} gap="2rem" paddingRight={"1rem"}>
                 <Button
                     colorScheme={"red"}
                     color="white"
@@ -69,8 +61,13 @@ const OrderInfo = () => {
                 </Select>
             </Flex>
             <Box maxH="calc(100% - 8rem)">
-                {isLoading && <Spinner/>}
-                {!isLoading && <OrderTable data={data} moveStageHandler={moveStageHandler}/>}
+                {isLoading && <Spinner />}
+                {!isLoading && (
+                    <OrderTable
+                        data={data}
+                        moveStageHandler={moveStageHandler}
+                    />
+                )}
             </Box>
         </Stack>
     );

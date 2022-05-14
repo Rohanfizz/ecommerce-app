@@ -11,7 +11,7 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiEdit, BiRupee } from "react-icons/bi";
 import { BsCartPlusFill } from "react-icons/bs";
@@ -23,17 +23,21 @@ import { isPromise } from "util/types";
 import useCart from "../../../hooks/query/useCart";
 import { isPrivilagedAtom } from "../../../store/authStore";
 import AddToCartButton from "../../Cart/AddToCartButton";
+import EditProductModal from "../../Dashboard/EditProductModal";
 
 const ProductCard: React.FC<{ product: any }> = ({ product }) => {
     const router = useRouter();
     const isPrivilaged = useRecoilValue(isPrivilagedAtom);
-    console.log(isPrivilaged);
+    // console.log(isPrivilaged);
     const ratingStars: any[] = [];
+
     for (let i = 1; i <= 5; i++) {
         if (product.ratingNumber >= i)
             ratingStars.push(<Icon as={AiFillStar} color="ratingStar" />);
         else ratingStars.push(<Icon as={AiOutlineStar} color="ratingStar" />);
     }
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [currProd, setcurrProd] = useState<string>("");
 
     const productClickHandler = () => {
         router.push(`/product/${product._id}`);
@@ -52,6 +56,15 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
             bg="white"
             _hover={{ cursor: "pointer" }}
         >
+            {isPrivilaged && isOpen && (
+                <EditProductModal
+                    isOpen={isOpen}
+                    onClose={() => {
+                        setIsOpen(false);
+                    }}
+                    id={currProd}
+                />
+            )}
             {isPrivilaged && (
                 <IconButton
                     aria-label="Edit product"
@@ -64,6 +77,10 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
                     w="3rem"
                     _hover={{
                         bg: "cyan.900",
+                    }}
+                    onClick={() => {
+                        setcurrProd(product._id);
+                        setIsOpen(true);
                     }}
                 />
             )}

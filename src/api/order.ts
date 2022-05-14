@@ -106,7 +106,7 @@ export const fetchAdminOrders = (filter: string) => {
         .get(
             `${process.env.BACKEND_URL}api/v1/orders/all?${
                 filter === "All" ? "" : "orderStatus=" + filter + "&"
-            }sort=createdAt`,
+            }sort=createdAt&fields=createdAt,invoice,orderStatus,totalPrice`,
             {
                 headers: {
                     Authorization: "Bearer " + getRecoil(userTokenAtom),
@@ -118,7 +118,11 @@ export const fetchAdminOrders = (filter: string) => {
         });
 };
 
-export const moveStage =async (factor: number, currStage: string, id: string) => {
+export const moveStage = async (
+    factor: number,
+    currStage: string,
+    id: string
+) => {
     const stages = [
         "Placed",
         "Approved",
@@ -128,23 +132,27 @@ export const moveStage =async (factor: number, currStage: string, id: string) =>
         "Delivered",
         "Cancelled",
     ];
-    
+
     const currStageIdx = stages.indexOf(currStage);
-    console.log(currStageIdx,factor);
+    console.log(currStageIdx, factor);
     console.log(stages[currStageIdx + factor]);
     await axios
-        .patch(`${process.env.BACKEND_URL}api/v1/orders/move/${id}`,{
-            orderStatus: stages[currStageIdx + factor],
-        }, {
-            headers: {
-                Authorization: "Bearer " + getRecoil(userTokenAtom),
+        .patch(
+            `${process.env.BACKEND_URL}api/v1/orders/move/${id}`,
+            {
+                orderStatus: stages[currStageIdx + factor],
             },
-            
-        })
+            {
+                headers: {
+                    Authorization: "Bearer " + getRecoil(userTokenAtom),
+                },
+            }
+        )
         .then((res) => {
             console.log(res);
             return res;
-        }).catch((err)=>{
+        })
+        .catch((err) => {
             console.log(err.response);
         });
 };

@@ -38,9 +38,9 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
             borderRadius={"0.5rem"}
             boxShadow="xl"
             // p="6"
-            paddingLeft='1rem'
-            paddingRight='2rem'
-            paddingTop='1rem'
+            paddingLeft="1rem"
+            paddingRight="2rem"
+            paddingTop="1rem"
             rounded="md"
             bg="white"
         >
@@ -53,7 +53,7 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
             >
                 <Text fontSize={"3xl"}>{product.name}</Text>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={6} >
+            <GridItem rowSpan={1} colSpan={6}>
                 <Flex
                     alignItems={"center"}
                     h="100%"
@@ -65,8 +65,8 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
                     {product.reviewCount}
                 </Flex>
             </GridItem>
-            <GridItem rowSpan={6} colSpan={4} sx={displayFlexCommon} h="100%" >
-                <ButtonGroup isAttached variant="solid" gap="0.2rem" h="5rem" >
+            <GridItem rowSpan={6} colSpan={4} sx={displayFlexCommon} h="100%">
+                <ButtonGroup isAttached variant="solid" gap="0.2rem" h="5rem">
                     <Button
                         leftIcon={<AiFillShopping />}
                         fontSize="120%"
@@ -81,7 +81,7 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
                     >
                         Add To Cart
                     </Button> */}
-                    <AddToCartButton product={product}/>
+                    <AddToCartButton product={product} />
                 </ButtonGroup>
             </GridItem>
             <GridItem rowSpan={5} colSpan={6}>
@@ -112,10 +112,10 @@ const ProductVitals: React.FC<{ product: any }> = ({ product }) => {
                         </Text>
                     </Text>
                 </Flex>
-                <Text paddingLeft="1rem" color='red.500'>
+                <Text paddingLeft="1rem" color="red.500">
                     You Save{" "}
                     {`₹${product.originalPrice - product.price}  (${Math.round(
-                        (product.price / product.originalPrice) * 100
+                        100 - (product.price / product.originalPrice) * 100
                     )}%)`}
                 </Text>
             </GridItem>

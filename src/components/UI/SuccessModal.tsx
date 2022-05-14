@@ -11,11 +11,12 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
     limitErrorModalShowAtom,
     showErrorModalAtom,
     showSuccessModalAtom,
+    successTextAtom,
 } from "../../store/UtilStore";
 import Expire from "../UI/Expire";
 
@@ -26,6 +27,7 @@ const SuccessModal = (props: any) => {
     const onCloseHandler = () => {
         setshowSuccessModal(false);
     };
+    const errorText = useRecoilValue(successTextAtom);
     // useEffect(() => {
     //     const timer = setInterval(() => {
     //         setshowErrorModal(false);
@@ -41,7 +43,7 @@ const SuccessModal = (props: any) => {
             <Modal isOpen={showSuccessModal} onClose={onCloseHandler}>
                 {/* <ModalOverlay /> */}
                 <ModalContent maxW="45rem" bg="green.400" color="white">
-                    <ModalHeader>{props.children}</ModalHeader>
+                    <ModalHeader>{errorText}</ModalHeader>
                     <ModalCloseButton _focus={{ outline: "0" }} />
                 </ModalContent>
             </Modal>

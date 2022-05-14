@@ -4,6 +4,14 @@ import ActionsMain from "./ActionsMain";
 import OrderAndProductsInfo from "./OrderAndProductsInfo";
 import SummaryMain from "./SummaryMain";
 
+export const cardCss = {
+    // borderRadius: "0.5rem",
+    boxShadow: "xl",
+    p: "1.5",
+    rounded: "md",
+    bg: "white",
+};
+
 const DashboardMain = () => {
     return (
         <Grid
@@ -12,15 +20,14 @@ const DashboardMain = () => {
             templateRows="repeat(10, 1fr)"
             templateColumns="repeat(10, 1fr)"
             gap={4}
-            p="1"
         >
-            <GridItem rowSpan={10} colSpan={6} >
+            <GridItem rowSpan={10} colSpan={6} sx={cardCss}>
                 <OrderAndProductsInfo />
             </GridItem>
-            <GridItem rowSpan={5} colSpan={4} bg="papayawhip">
+            <GridItem rowSpan={5} colSpan={4} sx={cardCss}>
                 <SummaryMain />
             </GridItem>
-            <GridItem rowSpan={5} colSpan={4} bg="papayawhip">
+            <GridItem rowSpan={5} colSpan={4} sx={cardCss}>
                 <ActionsMain />
             </GridItem>
         </Grid>
