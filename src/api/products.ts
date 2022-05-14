@@ -87,7 +87,8 @@ export const updateAdminProducts = async (pid: string, data: any) => {
     let sendData = { ...data };
     try {
         sendData.info = await JSON.parse(data.info);
-    } catch {
+    } catch(err) {
+        console.log(err);
         setRecoil(
             errorTextAtom,
             "Please cross check if data is in the correct format!"
@@ -97,7 +98,11 @@ export const updateAdminProducts = async (pid: string, data: any) => {
     }
     const productData = await axios
         // console.log(sendData);
-        .patch(`${process.env.BACKEND_URL}api/v1/products/${pid}`, sendData)
+        .patch(`${process.env.BACKEND_URL}api/v1/products/${pid}`, sendData,{
+            headers: {
+                Authorization: "Bearer " + getRecoil(userTokenAtom),
+            },
+        })
         .then((res) => {
             setRecoil(successTextAtom, "Product Updated Successfully!");
             setRecoil(showSuccessModalAtom, true);

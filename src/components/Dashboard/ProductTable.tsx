@@ -97,7 +97,7 @@ export default function ProductTable({ data, router, setfetchingProduct }) {
                     onClose={() => {
                         setIsOpen(false);
                     }}
-                    setfetchingProduct={setfetchingProduct}
+                    // setfetchingProduct={setfetchingProduct}
                     id={currProd}
                 />
             )}

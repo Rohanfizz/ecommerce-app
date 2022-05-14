@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import { fetchProductById, fetchProductByIdAdmin, updateAdminProducts } from "../../api/products";
 import { categories } from "../Products/FilterBox/FilterBox";
 
-const EditProductModal = ({ isOpen, onClose, id,setfetchingProduct }) => {
+const EditProductModal = ({ isOpen, onClose, id }) => {
     const [data, setData] = useState<any>({});
 
     const productUpdater = async () => {
@@ -30,7 +30,7 @@ const EditProductModal = ({ isOpen, onClose, id,setfetchingProduct }) => {
     useEffect(() => {
         const fetcher = async () => {
             setData(await fetchProductByIdAdmin(id));
-            setfetchingProduct(true)
+            // setfetchingProduct(true)
         };
         fetcher();
     }, [id]);
