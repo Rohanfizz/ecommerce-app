@@ -5,7 +5,8 @@ const nextConfig = {
         ENVIRONMENT: process.env.NODE_ENV === "production" ? "prod" : "dev",
         BACKEND_URL:
             process.env.NODE_ENV === "production"
-                ? "https://mighty-coast-67371.herokuapp.com/"
+                ? "https://ecommerce-backend-bou8.onrender.com/"
+                // ? "https://mighty-coast-67371.herokuapp.com/"
                 : "http://localhost:8000/",
     },
 };
