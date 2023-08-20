@@ -2,7 +2,7 @@ import { atom } from "recoil";
 import { OutOfStockItem } from "../Models/OrderModel";
 
 export const adIdxState = atom({
-    key: "adIdxState",
+    key: "adIdx",
     default: 0,
 });
 
