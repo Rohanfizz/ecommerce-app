@@ -1,6 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import LogoSvg from "./../../assets/logo.svg"
+import Image from "next/image";
 
 function NavLogo() {
     const router = useRouter();
