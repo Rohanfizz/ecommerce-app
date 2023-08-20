@@ -10,7 +10,8 @@ export const validateUser =async (token:string)=>{
     }catch(err){
         return null;
     }
-}
+} 
+
 
 export const signUpReq = (
     firstName: string,
