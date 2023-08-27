@@ -33,7 +33,9 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
 
     for (let i = 1; i <= 5; i++) {
         if (product.ratingNumber >= i)
-            ratingStars.push(<Icon as={AiFillStar} color="ratingStar" />);
+            ratingStars.push(
+                <Icon as={AiFillStar} color="ratingStar" key={i} />
+            );
         else ratingStars.push(<Icon as={AiOutlineStar} color="ratingStar" />);
     }
     const [isOpen, setIsOpen] = useState<boolean>(false);

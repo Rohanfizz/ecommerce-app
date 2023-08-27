@@ -1,12 +1,14 @@
 import React from "react";
 import { fetchOrderById } from "../../../src/api/order";
 import TrackOrderMain from "../../../src/components/TrackOrder/TrackOrderMain";
+import ProtectedRoutes from "../../../src/components/Util/ProtectedRoutes";
 
 const TrackOrderPage = ({ orderInfo }) => {
-
     return (
         <>
-            <TrackOrderMain orderInfo={orderInfo} />
+            <ProtectedRoutes>
+                <TrackOrderMain orderInfo={orderInfo} />
+            </ProtectedRoutes>
         </>
     );
 };
