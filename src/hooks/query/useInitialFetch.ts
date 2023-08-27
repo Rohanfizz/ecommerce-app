@@ -13,7 +13,6 @@ import {
 } from "../../store/UtilStore";
 import { isPrivilagedAtom, userTokenAtom } from "../../store/authStore";
 import { useEffect } from "react";
-import localforage from "localforage";
 import Cart from "../../Models/cartModel";
 import { validateUser } from "../../api/auth";
 import { setRecoil } from "recoil-nexus";
@@ -47,17 +46,21 @@ const useInitialFetch = () => {
 
     useEffect(() => {
         const fetcher = async () => {
-            const userToken: any = await localforage.getItem("userToken");
+            const userToken: any =
+                typeof window != undefined
+                    ? localStorage.getItem("userToken")
+                    : null;
             const token = JSON.parse(userToken);
             const user = await validateUser(token);
-            
-            if (user?.token != null) {
+            console.log(user);
+
+            if (user != null && user?.token != null) {
                 setUserToken(user?.token);
                 setRecoil(isPrivilagedAtom, user?.data?.user?.role != "user");
                 setfetchingCart(true);
             }
         };
-        if (typeof window !== "undefined") fetcher();
+        if (typeof window !== undefined) fetcher();
     }, []);
 };
 export default useInitialFetch;

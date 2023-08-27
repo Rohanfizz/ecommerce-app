@@ -1,5 +1,4 @@
 import axios from "axios";
-import localforage from "localforage";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { setRecoil } from "recoil-nexus";
@@ -44,9 +43,13 @@ const useLogin = (email: string, password: string) => {
             },
             onSettled: async (data) => {
                 setToken(data?.data?.token);
-                await localforage.setItem("userToken", data?.data?.token);
-                
-                setisPrivilaged((data?.data?.data?.user?.role) != "user");
+                if (typeof window !== undefined) {
+                    localStorage.setItem(
+                        "userToken",
+                        JSON.stringify(data?.data?.token)
+                    ); //gpt
+                }
+                setisPrivilaged(data?.data?.data?.user?.role != "user");
                 setfetchingCart(true);
             },
         }

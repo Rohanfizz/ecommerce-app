@@ -1,35 +1,30 @@
 import { atom, selector } from "recoil";
-import localforage from "localforage";
 
-const localforageEffect =
-    (key) =>
-    ({ setSelf, onSet, trigger }) => {
-        // If there's a persisted value - set it on load
-        const loadPersisted = async () => {
-            const savedValue: any = await localforage.getItem(key);
+// export const localStorageEffect =
+//     (key: string) =>
+//     ({ setSelf, onSet }: { setSelf: Function; onSet: Function }) => {
+//         if (typeof window !== undefined) {
+//             const savedValue = localStorage.getItem(key);
+//             if (savedValue != null) {
+//                 setSelf(JSON.parse(savedValue));
+//             }
+//         }
 
-            if (savedValue != null) {
-                setSelf(JSON.parse(savedValue));
-            }
-        };
-
-        // Asynchronously set the persisted data
-        if (trigger === "get") {
-            loadPersisted();
-        }
-
-        // Subscribe to state changes and persist them to localforage
-        onSet((newValue, _, isReset) => {
-            isReset
-                ? localforage.removeItem(key)
-                : localforage.setItem(key, JSON.stringify(newValue));
-        });
-    };
+//         onSet((newValue: any, _: any, isReset: any) => {
+//             if (typeof window !== undefined) {
+//                 isReset
+//                     ? localStorage.removeItem(key)
+//                     : localStorage.setItem(key, JSON.stringify(newValue));
+//             }
+//         });
+//     };
+// const getUserTokenFromLocalStorage = () =>
+//     typeof window !== undefined ? localStorage.getItem("userToken") : null;
 
 export const userTokenAtom = atom({
     key: "userToken",
     default: null,
-    effects: [localforageEffect("userToken")],
+    // effects: [localStorageEffect("userToken")],
 });
 
 export const isPrivilagedAtom = atom<Boolean>({

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { setRecoil } from "recoil-nexus";
 import { isLoggedInSelector, isPrivilagedAtom } from "../../store/authStore";
 import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
-const isBrowser = () => typeof window !== "undefined";
+const isBrowser = () => typeof window !== undefined;
 
 const ProtectedRoutes = ({ children }) => {
     const router = useRouter();
