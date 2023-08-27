@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
 import FilterSortBar from "../src/components/Products/SortBox";
 import FrontPageAd from "../src/components/Products/FrontPageAd";
-import ProductList from "../src/components/Products/ProductList";
+import { AiFillWarning } from "react-icons/ai";
 import ProductViewer from "../src/components/Products/ProductViewer";
 import React, { useState } from "react";
 import {
     Box,
     Button,
+    Icon,
     Modal,
     ModalBody,
     ModalContent,
@@ -48,9 +49,13 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                         color="yellow"
                         fontSize={"1.5rem"}
                         textAlign={"center"}
+                        paddingTop='0.5rem'
+                        paddingBottom='0.5rem'
                     >
+                        <Icon as={AiFillWarning} />
                         The backend API can take 1-2 mins to respond. Please
-                        wait if website throws an error!
+                        keep reloading if website throws an error!
+                        <Icon as={AiFillWarning} />
                     </Text>
                     {/* Modal body with project description */}
                     <ModalBody fontSize={"1rem"}>
