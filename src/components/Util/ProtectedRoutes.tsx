@@ -8,12 +8,13 @@ const isBrowser = () => typeof window !== undefined;
 
 const ProtectedRoutes = ({ children }) => {
     const router = useRouter();
-    
+
     const protectedRoutes = ["/dashboard"];
-    let pathIsProtected = protectedRoutes.indexOf(router.pathname) != -1;
+
     const isLoggedIn = useRecoilValue(isLoggedInSelector);
     const isPrivilaged = useRecoilValue(isPrivilagedAtom);
-    // useEffect(()=>{
+    useEffect(() => {
+        let pathIsProtected = protectedRoutes.indexOf(router.pathname) != -1;
         if (pathIsProtected && isBrowser() && isLoggedIn && isPrivilaged) {
             return children;
         } else {
@@ -25,9 +26,7 @@ const ProtectedRoutes = ({ children }) => {
             setRecoil(showErrorModalAtom, true);
             return <></>;
         }
-    // },[])
-    
-    
+    }, []);
 };
 
 export default ProtectedRoutes;
