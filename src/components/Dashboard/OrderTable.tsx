@@ -28,7 +28,7 @@ import { getInvoice } from "../../api/order";
 import fileDownload from "js-file-download";
 import { useRouter } from "next/router";
 
-export default function OrderTable({ data ,moveStageHandler}) {
+export default function OrderTable({ data, moveStageHandler }) {
     // const header = ["name", "created", "actions"];
 
     const header = [
@@ -126,7 +126,7 @@ export default function OrderTable({ data ,moveStageHandler}) {
                     }}
                 >
                     {/* <Box> */}
-                    {data.map((token, tid) => {
+                    {data?.map((token, tid) => {
                         return (
                             <Tr
                                 key={tid}
@@ -207,7 +207,13 @@ export default function OrderTable({ data ,moveStageHandler}) {
                                                     token.orderStatus ===
                                                     "Placed"
                                                 }
-                                                onClick={()=>{moveStageHandler(-1,token.orderStatus,token._id)}}
+                                                onClick={() => {
+                                                    moveStageHandler(
+                                                        -1,
+                                                        token.orderStatus,
+                                                        token._id
+                                                    );
+                                                }}
                                                 aria-label="Move To Previous Stage"
                                                 colorScheme="pink"
                                                 icon={<BsFillCaretLeftFill />}
@@ -218,11 +224,17 @@ export default function OrderTable({ data ,moveStageHandler}) {
                                             <IconButton
                                                 isDisabled={
                                                     token.orderStatus ===
-                                                    "Delivered" ||
+                                                        "Delivered" ||
                                                     token.orderStatus ===
-                                                    "Cancelled"
+                                                        "Cancelled"
                                                 }
-                                                onClick={()=>{moveStageHandler(1,token.orderStatus,token._id)}}
+                                                onClick={() => {
+                                                    moveStageHandler(
+                                                        1,
+                                                        token.orderStatus,
+                                                        token._id
+                                                    );
+                                                }}
                                                 aria-label="Move To Next Stage"
                                                 colorScheme="pink"
                                                 icon={<BsFillCaretRightFill />}
