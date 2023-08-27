@@ -9,7 +9,7 @@ const AdminDashboardPage = () => {
     return (
         // <Box h="100%" w="100">
             <ProtectedRoutes>
-                <DashboardMain />
+                {/* <DashboardMain /> */}
             </ProtectedRoutes>
         // </Box>
     );
