@@ -28,7 +28,6 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                 isCentered
                 motionPreset="slideInBottom"
                 size={"xl"}
-                zIndex={"100"}
             >
                 <ModalOverlay
                     backdropFilter="blur(10px) hue-rotate(90deg)"
