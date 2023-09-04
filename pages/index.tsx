@@ -20,7 +20,7 @@ import {
 
 const RenderWarningModal = ({ showModal, closeModal }) => {
     return (
-        <>
+        <Box>
             {/* Modal */}
             <Modal
                 isOpen={showModal}
@@ -28,6 +28,7 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                 isCentered
                 motionPreset="slideInBottom"
                 size={"xl"}
+                zIndex={"100"}
             >
                 <ModalOverlay
                     backdropFilter="blur(10px) hue-rotate(90deg)"
@@ -49,12 +50,12 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                         color="yellow"
                         fontSize={"1.5rem"}
                         textAlign={"center"}
-                        paddingTop='0.5rem'
-                        paddingBottom='0.5rem'
+                        paddingTop="0.5rem"
+                        paddingBottom="0.5rem"
                     >
                         <Icon as={AiFillWarning} />
                         The backend API can take 1-2 mins to respond. Please
-                        keep reloading if website throws an error!
+                        keep reloading if website doesn't load data!
                         <Icon as={AiFillWarning} />
                     </Text>
                     {/* Modal body with project description */}
@@ -96,7 +97,7 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </>
+        </Box>
     );
 };
 

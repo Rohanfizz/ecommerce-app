@@ -14,11 +14,15 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import useCart from "../../hooks/query/useCart";
 import Cart from "../../Models/cartModel";
 import { cartAtom, cartOpenAtom } from "../../store/CartStore";
 import CartContent from "./CartContent";
+import { userTokenAtom } from "../../store/authStore";
+import ErrorModal from "../UI/ErrorModal";
+import { setRecoil } from "recoil-nexus";
+import { errorTextAtom, showErrorModalAtom } from "../../store/UtilStore";
 
 const cartItems = [
     {
@@ -51,14 +55,24 @@ const CartModal: React.FC = () => {
     // const [cart, setCart] = useRecoilState(cartAtom);
     const [cartIsOpen, setCartIsOpen] = useRecoilState(cartOpenAtom);
     const { editCartHandler, deleteFromCartHandler, cart } = useCart();
+    const isLoggedin = useRecoilValue(userTokenAtom);
+
     const router = useRouter();
-    const checkoutHandler = ()=>{
+    const checkoutHandler = () => {
         setCartIsOpen(false);
-        router.push('/checkout');
-    }
+        if (isLoggedin) router.push("/checkout");
+        else {
+            setRecoil(
+                errorTextAtom,
+                "You need to be logged in!"
+            );
+            setRecoil(showErrorModalAtom, true);
+        }
+    };
     return (
         <>
             {/* <Button onClick={onOpen}>Open Modal</Button> */}
+            
             <Modal
                 isOpen={cartIsOpen}
                 onClose={() => {
@@ -66,7 +80,6 @@ const CartModal: React.FC = () => {
                 }}
                 isCentered
                 scrollBehavior={"inside"}
-                
             >
                 <ModalOverlay />
                 <ModalContent h="45rem" minW="40rem">
@@ -92,7 +105,9 @@ const CartModal: React.FC = () => {
                         >
                             Close
                         </Button>
-                        <Button colorScheme="blue" onClick={checkoutHandler}>Checkout</Button>
+                        <Button colorScheme="blue" onClick={checkoutHandler}>
+                            Checkout
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

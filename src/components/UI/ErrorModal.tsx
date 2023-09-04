@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     Modal,
     ModalBody,
@@ -19,7 +20,7 @@ import {
 } from "../../store/UtilStore";
 import Expire from "../UI/Expire";
 
-const ErrorModal= (props:any) => {
+const ErrorModal = (props: any) => {
     const [showErrorModal, setshowErrorModal] =
         useRecoilState(showErrorModalAtom);
 
@@ -32,22 +33,22 @@ const ErrorModal= (props:any) => {
     //         setshowErrorModal(false);
     //     }, 100);
     //     return clearInterval(timer);
-    // }, [setshowErrorModal]);    
+    // }, [setshowErrorModal]);
     return (
         <Expire
             delay={2000}
             setterFunction={setshowErrorModal}
             visibleProperty={showErrorModal}
         >
-            <Modal isOpen={showErrorModal} onClose={onCloseHandler}>
-                {/* <ModalOverlay /> */}
-                <ModalContent maxW="45rem" bg="red.400" color="white">
-                    <ModalHeader>
-                       {errorText}
-                    </ModalHeader>
-                    <ModalCloseButton _focus={{ outline: "0" }} />
-                </ModalContent>
-            </Modal>
+            <Box>
+                <Modal isOpen={showErrorModal} onClose={onCloseHandler}>
+                    {/* <ModalOverlay /> */}
+                    <ModalContent maxW="45rem" bg="red.400" color="white">
+                        <ModalHeader>{errorText}</ModalHeader>
+                        <ModalCloseButton _focus={{ outline: "0" }} />
+                    </ModalContent>
+                </Modal>
+            </Box>
         </Expire>
     );
 };
