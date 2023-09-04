@@ -14,12 +14,12 @@ const CheckoutPage: NextPage = () => {
     const isLoggedin = useRecoilValue(userTokenAtom);
     React.useEffect(()=>{
         //If user tries to get to this page without logging in
-        setRecoil(
-            errorTextAtom,
-            "You need to be logged in!"
-        );
-        setRecoil(showErrorModalAtom, true);
-        if(!isLoggedin) router.push('/');
+        // setRecoil(
+        //     errorTextAtom,
+        //     "You need to be logged in!"
+        // );
+        // setRecoil(showErrorModalAtom, true);
+        // if(!isLoggedin) router.push('/');
     },[])
     
     return (
