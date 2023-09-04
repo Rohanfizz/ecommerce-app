@@ -54,7 +54,7 @@ const RenderWarningModal = ({ showModal, closeModal }) => {
                     >
                         <Icon as={AiFillWarning} />
                         The backend API can take 1-2 mins to respond. Please
-                        keep reloading if website doesn't load data!
+                        keep reloading if website doesn&apost load data!
                         <Icon as={AiFillWarning} />
                     </Text>
                     {/* Modal body with project description */}
