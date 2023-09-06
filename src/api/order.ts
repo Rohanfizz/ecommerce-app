@@ -95,6 +95,13 @@ export const fetchUserOrders = async () => {
     return orderData;
 };
 
+const ordersCreatedAtSorter = (a,b)=>{
+    let d1 = new Date(a.createdAt);
+    let d2 = new Date(b.createdAt);
+    if(b>a) return 1;
+    return -1;
+}
+
 export const fetchAdminOrders = (filter: string) => {
     console.log(
         filter,
@@ -114,7 +121,10 @@ export const fetchAdminOrders = (filter: string) => {
             }
         )
         .then((res) => {
-            return res;
+            let data = res.data?.data?.data
+            data.sort(ordersCreatedAtSorter);
+            // console.log(data)
+            return data
         });
 };
 
@@ -154,5 +164,6 @@ export const moveStage = async (
         })
         .catch((err) => {
             console.log(err.response);
+
         });
 };

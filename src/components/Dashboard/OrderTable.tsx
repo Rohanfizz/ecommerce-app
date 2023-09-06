@@ -27,6 +27,7 @@ import { wholeScreenLoadingAtom } from "../../store/UtilStore";
 import { getInvoice } from "../../api/order";
 import fileDownload from "js-file-download";
 import { useRouter } from "next/router";
+import { days, months } from "../../util";
 
 export default function OrderTable({ data, moveStageHandler }) {
     // const header = ["name", "created", "actions"];
@@ -71,6 +72,22 @@ export default function OrderTable({ data, moveStageHandler }) {
     };
     const trackOrderHandler = (oid) => {
         router.push(`/order/track/${oid}`);
+    };
+    const getDate = (s: string) => {
+        let date = new Date(s);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const res =
+            days[date.getDay()] +
+            ", " +
+            date.getDay() +
+            1 +
+            " " +
+            " " +
+            months[date.getMonth()] +
+            " " +
+            date.getFullYear();
+        return res;
     };
 
     return (
@@ -171,7 +188,9 @@ export default function OrderTable({ data, moveStageHandler }) {
                                                 fontSize="md"
                                                 // fontWeight="hairline"
                                             >
-                                                {token[x]}
+                                                {x == "createdAt"
+                                                    ? getDate(token[x])
+                                                    : token[x]}
                                             </Td>
                                         </React.Fragment>
                                     );
@@ -201,7 +220,7 @@ export default function OrderTable({ data, moveStageHandler }) {
                                         size="sm"
                                         spacing={3}
                                     >
-                                        <Tooltip label="Move To Next Stage">
+                                        <Tooltip label="Move To Previous Stage">
                                             <IconButton
                                                 isDisabled={
                                                     token.orderStatus ===
@@ -220,7 +239,7 @@ export default function OrderTable({ data, moveStageHandler }) {
                                             />
                                         </Tooltip>
 
-                                        <Tooltip label="Move To Previous Stage">
+                                        <Tooltip label="Move To Next Stage">
                                             <IconButton
                                                 isDisabled={
                                                     token.orderStatus ===

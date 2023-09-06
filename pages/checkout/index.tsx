@@ -10,22 +10,11 @@ import { errorTextAtom, showErrorModalAtom } from "../../src/store/UtilStore";
 import { setRecoil } from "recoil-nexus";
 
 const CheckoutPage: NextPage = () => {
-    const router = useRouter();
-    const isLoggedin = useRecoilValue(userTokenAtom);
-    React.useEffect(()=>{
-        //If user tries to get to this page without logging in
-        // setRecoil(
-        //     errorTextAtom,
-        //     "You need to be logged in!"
-        // );
-        // setRecoil(showErrorModalAtom, true);
-        // if(!isLoggedin) router.push('/');
-    },[])
     
     return (
-        // <ProtectedRoutes>
+        <ProtectedRoutes>
             <CheckoutMain />
-        // </ProtectedRoutes>
+         </ProtectedRoutes>
     );
 };
 

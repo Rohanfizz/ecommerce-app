@@ -17,7 +17,8 @@ export const useFetchOrderData = () => {
         onSettled: (data:any) => {
             // console.log(data,'asd');
             setfetchingOrder(false);
-            setData(data?.data?.data?.data);
+            setData(data);
+            console.log(data);
         },
     });
     useEffect(()=>{
